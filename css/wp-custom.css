@@ -1,0 +1,286 @@
+/* wp - custom CSS editor: */
+
+
+/* change the background color */
+body {
+  background: none repeat scroll 0 0 #FFFFFF;
+  color: #000000;
+  padding-bottom: 0;
+}
+body.page-id-744 {
+background: #e7f1f7;   repeat 0 0  ;
+color: #5011C4;
+}
+body.page-id-294 {
+background: #FFFFFF;   repeat 0 0  ;
+color: #000000;
+}
+
+/* START OF Change Customizr Background Image  */
+/* Adjust the Image location 'wp-content/uploads/NAMEOFFILE.png' */
+body {
+background-image:     url(http://trafficrevenueresults.com/wp-content/uploads/2017/06/test-background.png)   repeat 0 0  ;
+}
+
+/* Set the color (#FAFAFA) of the internal body */
+#main-wrapper {
+background-color: #FFFFFF;
+}
+/* END OF Change Customizr Background Image  */
+
+
+/* special div for management page */
+/* div.mgmt {
+background-image: url('http://trafficrevenueresults.com/wp-content/uploads/2017/06/test-background-1.png');
+
+} */
+
+/* center headers */
+h1 {
+     text-align: center
+      }
+h2 {
+     text-align: center
+     }
+h3 {
+     text-align: center
+      }
+h4 {
+     text-align: center
+      }
+/* set HOME page paragraph spacing  and width */
+p.home {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-right: 12%;
+    margin-left: 12%;
+}
+/* set MGMT paragraph size for MGMT page */
+p.mgmt {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-right: 15%;
+    margin-left: 0%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+/* set FULL paragraph size for BLOG margins */
+p.full {
+    margin-top: 5px;
+    margin-bottom: 30px;
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+
+/* set blog paragraph width */
+p.blog {
+    margin-top: 20px;
+    margin-bottom: 36px;
+    margin-right: 15%;
+    margin-left: 15%;
+}
+/* set std paragraph width */
+p.std {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 20%;
+    margin-left: 20%;
+    text--align: center
+}
+
+/* set quote paragraph margins */
+p.qte {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-right: 20%;
+    margin-left: 20%;
+}
+
+/* set stmt paragraph width */
+p.stmt {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 30%;
+    margin-left: 30%;
+}
+/* set spc paragraph width */
+p.spc {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    margin-right: 20%;
+    margin-left: 20%;
+    display: inline-block;
+    vertical-align: top;
+}
+/* set research paragraph width */
+p.research {
+    margin-top: 30px;
+    margin-bottom: 5px;
+    margin-right: 15%;
+    margin-left: 15%;
+}
+/* set  summary paragraph width */
+p.summary {
+    margin-top: 0px;
+    margin-bottom: 30px;
+    margin-right: 15%;
+    margin-left: 15%;
+}
+
+
+
+
+
+/* set listing1 width bkgd color */
+p.list1{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 15%;
+    margin-left: 15%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 10%;
+    background-color: #e9f6f8;
+}
+/* set listing2 width bkgd color */
+p.list2{
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 15%;
+    margin-left: 15%;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 10%;
+    background-color: #ecebeb;
+}
+/* the end of paragraph formats */
+/* special addition for Edge */
+html{-ms-overflow-style: scrollbar;}
+body{-ms-overflow-style: scrollbar;}
+
+/* setting space between list items */
+article ul li { margin-bottom: 12px; }
+/* end of list item adjustments */
+
+/* adjust size and pos of caption */
+/* put caption at top of slider */
+.carousel-caption {
+position: absolute;
+max-width: 90%;
+top: -3%;
+}
+
+.carousel .item { text-align: center; }
+.carousel-caption { display: inline; margin-left: 0%; }
+.carousel-caption h1 { display: inline; }
+
+/* remove slider caption bkgrd */
+.carousel-caption {
+    background: none;
+}
+/* Remove Page/Post icon */
+.page #main-wrapper h1.format-icon:before {
+content:    none;
+}
+#footer #footer_one h3.widget-title{
+     font-size: 10px;
+}
+
+/* change header color background color  */
+header.tc-header {
+background-color: #ffffff; important!
+}
+
+
+.tc-header, .navbar-inner {
+ position: relative;
+ top: 0px;
+ left: 0px;
+ top: 0%;
+ left: 0px%;
+ }
+ min-height: 100px;
+ max-height: 150px;
+/* This is a comment */
+
+
+/*-------------------------------------
+BEGIN: Profile-Effects mockup page fixups
+to make TRR Management Team look like
+Translarity's.
+-------------------------------------*/
+
+/* body.page-id-294 */
+
+.page-id-874
+.navbar
+.nav>li>a {
+  font-size: 18px;
+}
+
+.page-id-874
+h1 {
+     text-align: left;
+     padding-left: 0%;
+     color: black;
+     font-size: 38px;
+     margin-left: -30px;
+}
+.page-id-874
+h2 {
+     text-align: left;
+     padding-left: 10%;
+     padding-right: 10%;
+     color: black;
+     font-size: 31.5px;
+}
+.page-id-874
+h3 {
+     text-align: left;
+     padding-left: 10%;
+     padding-right: 10%;
+     color: black
+     font-size: 22.5px;
+     margin-left: -50px;
+}
+.page-id-874
+h4 {
+     text-align: left;
+     padding-left: 0%;
+     color: black;
+     font-size: 19.8px;
+}
+
+.page-id-874
+p.full {
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 35px;
+    margin-right: 4%;
+    margin-left: 4%;
+    font-size: 17px;
+}
+
+/* set half of page paragraph margins */
+.page-id-874
+p.half {
+    width: 50%;
+    margin-top: 15px;
+    margin-bottom: 35px;
+    margin-right: 4%;
+    margin-left: 4%;
+    font-size: 17px;
+}
+.page-id-874
+.tc-external {
+    display: none;
+}
+
+/*-------------------------------------
+END: Profile-Effects mockup page fixups
+to make TRR Management Team look like
+Translarity's.
+-------------------------------------*/
