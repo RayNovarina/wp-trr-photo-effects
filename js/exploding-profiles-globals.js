@@ -28,19 +28,6 @@ function exp_statusLog( msg ) {
     console.log('******************************************');
   }
   console.log(msg);
-  //return;
-  /*
-  // if ( msg == 'init-done')
-  // if ( msg == 'cycle-done')
-  if ( $( ".status-ignore" ).length > 0) {
-    return;
-  }
-  if ( msg == "init-done" ) {
-    globals.status_msgs_class_ref = globals.cycle_msgs_class_ref;
-  } else {
-    $( globals.status_msgs_class_ref ).append( msg );
-  }
-  */
 };
 
 var globals = {
