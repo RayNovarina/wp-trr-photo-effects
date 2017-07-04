@@ -32,5 +32,4 @@ staging site:
 <script src="http://c6103c26.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/exploding-profiles-trr-fixes.js"></script>
 <script src="http://c6103c26.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/exploding-profiles.js"></script>
 </div>
-
 ====================================
