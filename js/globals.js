@@ -31,27 +31,31 @@ function exp_statusLog( msg ) {
 };
 
 var globals = {
-    pluginName: 'pixellate',
-    pluginInstanceName: 'plugin_pixellate',
+    pluginName: 'trr_pixellate',
+    pluginInstanceName: 'trr_plugin_pixellate',
 
-    init_msgs_class_ref: '.init-status',
-    cycle_msgs_class_ref: '.cycle-status',
-    status_msgs_class_ref: '.init-status',
+    pixellate_class: 'trr-photo-effect',
+    pixellate_class_ref: '.trr-photo-effect',
+    pixellate_elem_def: '<img class="trr-photo-effect title="photo_url halftone_url"/>',
+    // pixellate_photo_class_ref: '.bio-photo',
+    //pixellate_target_class: 'trr-pe-photo-background-image',
+    //pixellate_target_class_ref: '.trr-pe-photo-background-image',
+    pixellate_pixels_container_class: 'trr-pe-pixell-array',
+    pixellate_pixels_container_class_ref: '.trr-pe-pixell-array',
+    pixellate_pixel_class: 'trr-pe-pixellate-pixel',
+    pixellate_pixel_class_ref: '.trr-pe-pixellate-pixel',
 
-    pixellate_class: 'profile-container',
-    pixellate_class_ref: '.profile-container',
-    pixellate_elem_def: 'div class="profile-container"',
-    pixellate_photo_class_ref: '.bio-photo',
-    pixellate_pixels_container_class_ref: '.bio-pixell-array',
-    pixellate_target_class_ref: '.bio-background-image',
+    // bio_containers_class_ref: '.bios-container',
+    // bio_container_class_ref: '.bio-container',
 
-    bio_containers_class_ref: '.bios-container',
-    bio_container_class_ref: '.bio-container',
+    fixups_target_page_class_ref: '.page-id-874',
 
     defaults: {
       // Grid divisions
       columns: 30,
       rows: 30,
+      background_image_width: 780,
+      background_image_height: 780,
 
       // Duration of explosion animation
       duration: 1500,
@@ -73,7 +77,7 @@ var globals = {
       active_bio_idx: 0,
 
       // Scrolling results in change of profile.
-      scroll_events: true,
+      scroll_events: false,
 
       // Click on profile photo results in change of profile.
       click_events: false,

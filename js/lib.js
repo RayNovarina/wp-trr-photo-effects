@@ -2,33 +2,37 @@
 // Extend the jquery lib/Create a global method in the jquery space via the
 // jQuery.fn array of registered funcs.
 //
-// The 'pixellate()' plugin operates on a div 'bio-container' class.
-// Create and attach the plugin instance to that div, and run the
+// The 'pixellate()' plugin operates on a <img> 'trr-photo-effect' class.
+// Create and attach the plugin instance to that <img>, and run the
 // pixellate.init() method against it.
-// First call stack: exploding-profiles.js(L16).anonymousfunc() --> exp_build_default_view(this)
-//                   exp_build_default_view(L111): var $img_div = $active_bio.find('.image'); // jQuery('.bio-container');
-//                   exp_build_default_view(L116) --> $img_div.pixellate('in');
-//                                                sooo.... this is set to the elem that is calling pixellete()
+// First call stack: main.js(L16) --> exp_convert_data_to_html(this)
+//                   exp_convert_data_to_html(L111): el = jQuery( globals.pixellate_class_ref ).toArray().first
+//                   exp_convert_data_to_html(L116) --> jQuery(el).pixellate('', jQuery(el));
+//                            sooo.... this is set to the elem that is calling pixellete()
+
+// Params: this is set to the elem that is calling trr-pixellete(), i.e.
+//           the jQuery object (HTML '<img class="trr-photo-effect />')
+//         $pix_obj = jQuery object (HTML '<div class="bio-pixell-array"></div>')
+//         options = '' or 'in' or 'out'
 jQuery.fn[ globals.pluginName ] = function ( options, $pix_obj ) {
   return this.each(function() {
-    // Note: 'this' is the object (HTML '<div class="bio-container"'>) that this method is an attrib of.
     if ( !jQuery.data( this, globals.pluginInstanceName ) ) {
-      // This 'profile-container' div does not have a 'plugin_pixellate' method in its jquery data hash.
+      // This 'trr-photo-effect' <img> does not have a 'plugin_pixellate' method in its jquery data hash.
       exp_statusLog( "  ..*5b: jQuery.fn[ " + globals.pluginName + " ]*" );
       jQuery.data( this, globals.pluginInstanceName, new Plugin( this, options, $pix_obj ) );
-      // Now this div's jQuery.data has a plugin_pixellate() Plugin instance
+      // Now this img's jQuery.data has a plugin_pixellate() Plugin instance
       // referenced via 'jQuery.data( this, "plugin_" + exp_pluginName ).init();''
     } else if(typeof options === 'string') {
       exp_statusLog( "  ..*5c: jQuery.fn[ " + globals.pluginName + " ](" + options + ")*" );
       jQuery.data( this, globals.pluginInstanceName ).options.direction = options;
-      jQuery.data( this, globals.pluginInstanceName ).$pix_obj = jQuerypix_obj;
+      jQuery.data( this, globals.pluginInstanceName ).$pix_obj = $pix_obj;
       jQuery.data( this, globals.pluginInstanceName ).init();
     }
   });
 };
 
 function Plugin(el, options, $pix_obj) {
-  // Note: jQuery(el) = '<div class="profile-container"'>
+  // Note: jQuery(el) = '<img class="trr-photo-effect />'
   exp_statusLog( "  ..*5-creating Plugin: for " + jQuery(el).attr('id') + ". On: " + jQuery(el).attr('class') +
                  ".  $pixels at " + $pix_obj.attr('id') + "*");
   this.$el = jQuery(el);
@@ -43,23 +47,25 @@ function Plugin(el, options, $pix_obj) {
 
 Plugin.prototype = {
   init: function() {
-    // Note: this.$el = '<div class="profile-container"'>
+    // Note: this.$el = <img class="trr-photo-effect title="photo_url halftone_url"/>
     exp_statusLog( "  ..*7-Plugin init for " + this.$el.attr('id') + "*");
-    // this.$el.pixellate-pixel is an array of spans for each image fragment.
-    if(!this.$pix_obj.find('.pixellate-pixel').length) {
-      var $img = this.$el.find(globals.pixellate_photo_class_ref).find('img'),
+    // this.$pix_obj.trr-pe-pixell-array is an array of spans for each image fragment.
+    if(!this.$pix_obj.find( globals.pixellate_pixel_class_ref ).length) {
+      var photo_urls = this.$el.attr('title').split(' ');
+      var profile_url = photo_urls[0] || '',
+          halftone_url = photo_urls[1] || '',
           img = new Image();
 
       this.$el
-        .data('pixellate-image-src', $img.attr('src'))
+        .data('pixellate-image-src', halftone_url)
         .addClass('pixellate-lock');
 
       jQuery(img).one('file_load_completed', jQuery.proxy(this.createPixels, this));
 
       img.src = this.$el.data('pixellate-image-src');
       if(img.complete) {
-        exp_statusLog( "  ..*7a: copy of halftone-profile file " + this.$el.data('pixellate-image-src') +
-                       " loaded into div." + globals.pixellate_pixels_container_class_ref + ".*");
+        exp_statusLog( "  ..*7a: halftone-profile file " + this.$el.data('pixellate-image-src') +
+                       " loaded.*");
         jQuery(img).trigger('file_load_completed');
       }
     } else {
@@ -68,21 +74,25 @@ Plugin.prototype = {
   },
 
   createPixels: function() {
-    this.$pix_obj.find(globals.pixellate_pixels_container_class_ref).append(new Array((this.options.rows * this.options.columns) + 1).join('<span class="pixellate-pixel"></span>'));
-    exp_statusLog( "  ..*9-create $pixels at " + this.$pix_obj.attr('id') + ": pixellate-pixel[ ].length = '" + this.$pix_obj.find('.pixellate-pixel').length + "'*");
+    // this.$pix_obj = <div class="trr-pe-pixell-array"></div>
+    this.$pix_obj.append(new Array((this.options.rows * this.options.columns) + 1)
+                   .join('<span class="' + globals.pixellate_pixel_class + '"></span>'));
+    exp_statusLog( "  ..*9-create $pixels at " + this.$el.attr('id') +
+                   ": " + globals.pixellate_pixels_container_class + "[ ].length = '" +
+                   this.$pix_obj.find( globals.pixellate_pixel_class_ref ).length + "'*");
     this.stylePixels(true);
     },
 
   stylePixels: function(initializeStyles) {
     exp_statusLog( "  ..*10-stylePixels( " + (initializeStyles ? "onlyInitStyles" : this.options.direction) +
-                   ". Using $pixels at " + this.$pix_obj.attr('id') + " )*" );
+                   ". Using $pixels at " + this.$el.attr('id') + " )*" );
     var self = this,
-        w = this.$pix_obj.find(globals.pixellate_pixels_container_class_ref).width(),
-        h = this.$pix_obj.find(globals.pixellate_pixels_container_class_ref).height(),
+        $pixels_container = this.$pix_obj,
+        w = $pixels_container.width(),
+        h = $pixels_container.height(),
         columns = this.options.columns,
         rows = this.options.rows,
-        $pixels = this.$pix_obj.find('.pixellate-pixel'),
-        $pixels_container = this.$pix_obj.find(globals.pixellate_pixels_container_class_ref);
+        $pixels = this.$pix_obj.find(globals.pixellate_pixel_class_ref);
 
     // jQuery('.explode').find('.pixellate-pixel')[0] (length of array = 400)
     // <span class="pixellate-pixel"
@@ -161,11 +171,10 @@ Plugin.prototype = {
 function swap_in_bio( profile_idx, action, action_delay, effect, /*Code to resume when done*/ callback ) {
   var src_profile = jQuery( jQuery(globals.pixellate_class_ref).toArray()[ profile_idx ] ),
       active_bio_idx = parseInt( jQuery(globals.bio_containers_class_ref ).attr('active_bio_idx') ),
-      dest_bio = jQuery( jQuery(globals.bio_container_class_ref).toArray()[ active_bio_idx ] );
+      dest_bio = jQuery( jQuery(globals.bio_container_class_ref).toArray()[ active_bio_idx ] ),
+      scroll_to_bio = jQuery( jQuery(globals.bio_container_class_ref).toArray()[ profile_idx ] );
 
   if (effect == 'scroll') {
-    var scroll_to_bio = jQuery( jQuery(globals.bio_container_class_ref).toArray()[ profile_idx ] );
-
     exp_statusLog( "  ..*16a: swap_in_bio('" + action + "':'" + effect + "') for profile_idx " + profile_idx +
                    ". Active bioId: " + dest_bio.attr('active_id') +
                    ". New ProfileId: " + src_profile.attr('id') +
@@ -180,7 +189,7 @@ function swap_in_bio( profile_idx, action, action_delay, effect, /*Code to resum
                    ". New ProfileId: " + src_profile.attr('id') +
                    ". ScrollTo BioId:" + scroll_to_bio.attr('active_id') + ".*" );
 
-    TweenMax.to( window, 2, { scrollTo: "#someID" } );
+    //TweenMax.to( window, 2, { scrollTo: "#someID" } );
 
     //dest_bio.attr('active_id', src_profile.attr('id'));
     //dest_bio.attr('active_idx', src_profile.attr('profile-idx'));

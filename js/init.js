@@ -1,7 +1,7 @@
 
 function exp_init() {
   // console.clear();
-  console.log("************************ exp_init( scroll_events: " + globals.scroll_events + ") ************************");
+  console.log("************************ exp_init( scroll_events: " + globals.defaults.scroll_events + ") ************************");
   // jQuery:
   if (typeof jQuery !== 'undefined') {
     // jQuery is loaded
@@ -51,36 +51,30 @@ function exp_init() {
 
 };
 
-
 function exp_convert_data_to_html() {
   // Bind events and initialize plugin
   /*
-  <div class="profile-container">
-    <div class="profile-photo">
-      <img src="../images/jamer_hunt.jpg" />
-    </div>
-    <div class="info">
-      <div class="name">Jamer Hunt</div>
-      <div class="title">Grunt 2</div>
-    </div>
-    <div class="short-bio">
-      Jamar is Grunt 2. He sorta leads the The Climate Corporation's Engineering team. He has more than 15 years of experience leading the development of large-scale systems in a variety of industries. Prior to The Climate Corporation, Brian worked at Orbitz as a Senior Architect responsible for the development of their distributed service platform and overall architecture. Before Orbitz, Brian worked at the investment bank UBS where he built global interest rate trading systems. He has contributed frequently to the open source community, including having been the lead developer for the Jython project. He holds a B.S. in Finance from the University of Illinois at Champaign.
-    </div>
-    <div class="bio-photo">
-      <img src="../images/jamar_hunt-halftone-image-generator.png" />
-    </div>
-  </div>
+  <img class="trr-photo-effect title="photo_url halftone_url"/>
   */
 
-  exp_statusLog( "  ..*13: exp_init(): START data to html conversion.*" );
-  $bios_containers = jQuery( globals.bio_containers_class_ref);
+  globals.state = {};
+  globals.photos = jQuery( globals.pixellate_class_ref ).toArray();
+  exp_statusLog( "  ..*13: exp_convert_data_to_html(): START data to html conversion for " + globals.photos.length + " photos.*" );
 
-  jQuery.each( jQuery( '.profile-container' ).toArray(), function( index, el ) {
-    var name = jQuery(el).find( '.name' ).html().split(' ')[0].toLowerCase();
-    jQuery(el).attr( 'id', ('profile-' + (index + '') + '-' + name) );
-    jQuery(el).attr('profile-idx', index + '');
-    jQuery(el).attr( 'profile-name', name );
+  if ( globals.photos.length == 0 ) {
+    exp_statusLog( "  ..*13a: exp_convert_data_to_html(): pixellate_class_ref '" + globals.pixellate_class_ref + "' NOT FOUND.'*");
+    return;
+  }
+  jQuery.each( globals.photos, function( index, el ) {
+    jQuery(el).attr( 'id', ('photo-' + (index + '') ) );
+    jQuery(el).attr('photo-idx', index + '');
+    jQuery('<div class="trr-pe-pixell-array" ' +
+           'style="display: none; ' +
+                  'width: ' + globals.defaults.background_image_width + 'px; ' +
+                  'height: ' + globals.defaults.background_image_height + 'px;"></div>')
+          .insertAfter( jQuery(el) );
 
+    /*
     $bios_containers.append(
       '<div class="row bio-container' +
                  ' bio-container-for-' + jQuery(el).attr( 'id') + '"' +
@@ -95,6 +89,7 @@ function exp_convert_data_to_html() {
           '<div class="bio-background-image"></div>' +
         '</div>' +
       '</div>');
+      */
 
     if ( globals.defaults.scroll_events) {
       // Add scrollMagic hook for this bio.
@@ -130,41 +125,28 @@ function exp_convert_data_to_html() {
             '.bio-container-for-', '.bio-container-for-' + jQuery(el).attr( 'id') );
       })
       .addTo(globals.scrollMagic_controller); // assign the scene to the controller
-
-      /*
-      new ScrollMagic.Scene({
-        triggerElement: '.bio-container-for-' + jQuery(el).attr( 'id')
-        + ' .info' // point of execution
-        ,triggerHook: 'onLeave' //
-      })
-      .on('start', function () {
-          exp_scroll_trigger( '.bio-container-for-', '.bio-container-for-' + jQuery(el).attr( 'id') );
-      })
-      .addTo(globals.scrollMagic_controller);
-    */
     }
 
-    if (index > 0) {
-      jQuery( ".init-status" ).addClass('status-ignore');
-    }
-    jQuery(el).pixellate('', jQuery(el)); // chop up bio image into 'div.profile-container.bio-pixell-array' $pixel <span> array.
-    jQuery(el).pixellate('out', jQuery(el)); // initial state is an exploded image.
+    // chop up bio image into '<img /><div>trr-pixell-array' $pixel <span> array.</div>
+    jQuery(el).trr_pixellate('', jQuery(el).find('+ div'));
+    // initial state is an exploded image.
+    jQuery(el).trr_pixellate('out', jQuery(el).find('+ div'));
+jQuery(el).trr_pixellate('in', jQuery(el).find('+ div'));
     if ( globals.defaults.click_events) {
       exp_add_click_handler( index, el);
     }
   });
-  jQuery( ".init-status" ).removeClass('status-ignore');
   exp_statusLog( "  ..*14: exp_init(): END data to html conversion.*" );
 };
 
 function exp_build_default_view() {
   exp_statusLog( "  ..*15: exp_init(): Create default bio image from profile " + globals.defaults.active_profile_idx + ".*" );
-  jQuery( globals.bio_containers_class_ref ).attr('active_bio_idx', globals.defaults.active_bio_idx + '');
+  //jQuery( globals.bio_containers_class_ref ).attr('active_bio_idx', globals.defaults.active_bio_idx + '');
   // NOTE: upload, scroll event will trigger for 1st bio. Use that event to init bio page.
-  if ( !globals.defaults.scroll_events) {
-    // Put default profile into bio page, implode/create its bio image.
-    swap_in_bio( globals.defaults.active_profile_idx, 'implode', 0, '',
-    /*1-Callback when done*/ function() {
-    /*1-*/});
-  }
+  //if ( !globals.defaults.scroll_events) {
+  //  // Put default profile into bio page, implode/create its bio image.
+  //  swap_in_photo( globals.defaults.active_profile_idx, 'implode', 0, '',
+  //  /*1-Callback when done*/ function() {
+  //  /*1-*/});
+  //}
 };

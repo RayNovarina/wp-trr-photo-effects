@@ -3,18 +3,18 @@
 <script src=" https://4e73598e.ngrok.io/Sites/exploding-profiles/js/exploding-profiles-globals.js"></script>
 */
 function exp_target_page_fixups() {
-if ( jQuery( globals.target_page_class_ref ).length > 0 ) {
+if ( jQuery( globals.fixups_target_page_class_ref ).length > 0 ) {
 
-exp_statusLog( "  ..*0: exp_exp_target_page_fixups(): for WP page class '" + globals.target_page_class_ref + "'. References = " + jQuery( globals.target_page_class_ref ).length + "*");
+exp_statusLog( "  ..*0: exp_exp_target_page_fixups(): for WP page class '" + globals.fixups_target_page_class_ref + "'. References = " + jQuery( globals.fixups_target_page_class_ref ).length + "*");
 //jQuery('.page-id-874 header').html()
 
 //jQuery('.page-id-874 header').toArray()[0]
 //<header class="tc-header clearfix row-fluid tc-tagline-off tc-title-logo-on  tc-shrink-on tc-menu-on logo-left tc-second-menu-on tc-second-menu-in-sn-before-when-mobile" role="banner" style="height: auto; top: 32px;">
 
-jQuery('body' + globals.target_page_class_ref).removeClass('tc-sticky-header');
+jQuery('body' + globals.fixups_target_page_class_ref).removeClass('tc-sticky-header');
 
 // Scrubs top nav header. Logo, nav links, tagline, etc.
-jQuery( globals.target_page_class_ref + ' header').toArray()[0].innerHTML =
+jQuery( globals.fixups_target_page_class_ref + ' header').toArray()[0].innerHTML =
 '<div class="brand span3 pull-left">' +
 '  <a class="site-logo" href="http://trafficrevenueresults.com/" title="Translarity | ">' +
 '    <img src="http://trafficrevenueresults.com/wp-content/uploads/2017/06/Translarity-Logo-April-V1.200.png" alt="Back Home" width="1050" height="195" class=" attachment-657"/></a>' +
@@ -58,7 +58,7 @@ jQuery( globals.target_page_class_ref + ' header').toArray()[0].innerHTML =
 //Object { 0: <div#tc-reset-margin-top.container-fluid>, selector: ".page-id-874 #tc-reset-margin-top", length: 1, prevObject: Object, context: HTMLDocument → management-team }
 
 // Move page title up. After zapping mobile flex css?
-jQuery( globals.target_page_class_ref + ' #tc-reset-margin-top').attr('style', 'margin-top: 40px;');
+jQuery( globals.fixups_target_page_class_ref + ' #tc-reset-margin-top').attr('style', 'margin-top: 40px;');
 
 // jQuery('.entry-header').html()
 //"<h1 class="entry-title ">Translarity Management Team</h1><hr class="featurette-divider __before_content">        "
@@ -66,7 +66,7 @@ jQuery( globals.target_page_class_ref + ' #tc-reset-margin-top').attr('style', '
 //jQuery('.page-id-874 .entry-content').attr('style', 'font-size: 18px; line-height: 1.6em;');
 
 } else {
-  exp_statusLog( "  ..*0a: exp_exp_target_page_fixups(): WP page class '" + globals.target_page_class_ref + "' NOT FOUND.'*");
+  exp_statusLog( "  ..*0a: exp_exp_target_page_fixups(): WP page class '" + globals.fixups_fixups_target_page_class_ref + "' NOT FOUND.'*");
 };
 
 };
