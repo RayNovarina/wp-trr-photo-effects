@@ -69,9 +69,11 @@ function exp_convert_data_to_html() {
     jQuery(el).attr( 'id', ('photo-' + (index + '') ) );
     jQuery(el).attr('photo-idx', index + '');
     jQuery('<div class="trr-pe-pixell-array" ' +
-           'style="display: none; ' +
+           'style="display: block; position: relative; top 0px; left: 500px; ' +
                   'width: ' + globals.defaults.background_image_width + 'px; ' +
-                  'height: ' + globals.defaults.background_image_height + 'px;"></div>')
+                  'height: ' + globals.defaults.background_image_height + 'px; ' +
+                  '' +
+                  '"></div>')
           .insertAfter( jQuery(el) );
 
     /*
@@ -131,6 +133,7 @@ function exp_convert_data_to_html() {
     jQuery(el).trr_pixellate('', jQuery(el).find('+ div'));
     // initial state is an exploded image.
     jQuery(el).trr_pixellate('out', jQuery(el).find('+ div'));
+// HACK: for testing.
 jQuery(el).trr_pixellate('in', jQuery(el).find('+ div'));
     if ( globals.defaults.click_events) {
       exp_add_click_handler( index, el);

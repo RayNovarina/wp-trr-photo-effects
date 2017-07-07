@@ -1,30 +1,3 @@
-cd /Applications/MAMP/htdocs/Sites/wordpress-5-trr-staging/wp-content/plugins/trr-photo-effects
-//---------------------------------------------------
-based on:
-https://codepen.io/anon/pen/rwWGME
-http://www.hongkiat.com/blog/less-basic/
-http://getbootstrap.com/getting-started/#template
-http://www.picturetopeople.org/image_effects/photo-halftone/halftone-image-generator.html
-https://www.climate.com/about/leadership
-
-local dev path for this file:
-  /Applications/MAMP/htdocs/Sites/wordpress-5-trr-staging/wp-content/plugins/trr-photo-effects/README.txt
-
-browser access: start OSX Mamp. Apache server at localhost:8888
-  browser only access: http://localhost:8888/Sites/translarity/index.html.en
-
-Base code cloned via
-  $ git clone https://github.com/RayNovarina/harp-heroku-photo-effects.git trr-photo-effects
-
-github repository:
-  https://github.com/RayNovarina/wp-trr-phpto-effects.git
-staging site:
-  http://trafficrevenueresults.com/management-team/
-
-===================
-jQuery( '<canvas id="myCanvas" style="width:100%; height:100%; "></canvas>' ).insertBefore( jQuery(globals.photo_effect_class_ref).first() );
-
-========================
 var getImageData = function(callback) {
   globals.canvas = document.createElement("canvas");
   globals.image = document.createElement("img");
@@ -43,8 +16,8 @@ var getImageData = function(callback) {
   globals.image.src = man_profile_200x200_jpeg;
   globals.image_name = 'man_profile_200x200_jpeg';
 
-	globals.canvas.width = image.width;
-	globals.canvas.height = image.height;
+	globals.canvas.width = globals.image.width;
+	globals.canvas.height = globals.image.height;
 
   var after_drawImage_delay = 0;
   setTimeout(function() {
@@ -62,17 +35,17 @@ var getImageData = function(callback) {
   }, after_drawImage_delay);
 }
 
-var render = function(a) {
-	requestAnimationFrame(render);
+globals.render = function(a) {
+	requestAnimationFrame(globals.render);
 
-	particles.geometry.verticesNeedUpdate = true;
+	globals.particles.geometry.verticesNeedUpdate = true;
 	//if(!isMouseDown){
 	globals.camera.position.x += (0-globals.camera.position.x)*0.06;
 	globals.camera.position.y += (0-globals.camera.position.y)*0.06;
 	globals.camera.lookAt(globals.centerVector);
 	//}
 
-	renderer.render(globals.scene, globals.camera);
+	globals.renderer.render(globals.scene, globals.camera);
 };
 
 var drawTheMap = function(imagedata, dots_size, dots_color, vertex_speed,
