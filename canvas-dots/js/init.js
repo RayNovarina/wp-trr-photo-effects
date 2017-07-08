@@ -67,14 +67,17 @@ function trr_convert_data_to_html() {
   //jQuery( '<canvas id="myCanvas" style="width:500px; height:500px; border: 2px solid red; "></canvas>' ).insertBefore( jQuery( '.entry-content' ) );
 
   jQuery('<canvas id="myCanvas" ' +
-                 'style="width: 44%; ' +
-                        'height: 84%; ' +
+                 'style="' +
+                        'width: 100%; ' + //44
+                        'height: 100%; ' + //84
+                        'padding: 0; ' +
+                        'margin: 0; ' +
                         'overflow: hidden; ' +
                         'display: block; ' +
                         'position: fixed; ' +
                         'z-index: 1; ' +
                         'top: 15%; ' +
-                        'left: 55%; ' +
+                        'left: 54%; ' +
                         'border: 2px solid red;' +
                         '" ' +
          '></canvas>').insertBefore( jQuery( '.entry-header' ) );
@@ -145,9 +148,6 @@ function trr_build_default_view( callback ) {
 
   globals.centerVector = new THREE.Vector3(0, 0, 0);
 
-  getImageData(
-  /*1-Callback when done*/ function(imagedata) {
-  globals.imagedata = imagedata;
   globals.renderer = new THREE.WebGLRenderer({
     canvas: document.getElementById("myCanvas"),
     antialias: true
@@ -167,12 +167,16 @@ function trr_build_default_view( callback ) {
     globals.renderer_height / - 2,
     1,
     1000 );
+
   globals.camera.position.set(7, 0, 4);
   globals.camera.lookAt(globals.centerVector);
   globals.scene.add(globals.camera);
   globals.camera.zoom = 4;
   globals.camera.updateProjectionMatrix();
 
+  getImageData(
+  /*1-Callback when done*/ function(imagedata) {
+  globals.imagedata = imagedata;
   drawTheMap(globals.imagedata, globals.defaults.dots_size,
              globals.defaults.dots_color, globals.defaults.vertex_speed,
              globals.render, globals.scene,

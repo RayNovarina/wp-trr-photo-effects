@@ -2,10 +2,8 @@ var getImageData = function(callback) {
   globals.canvas = document.createElement("canvas");
   globals.image = document.createElement("img");
 
-  //image.src = imgData;
-
-  //image.src = cat_original_100x100_jpeg;
-  //image_name = 'cat_original_100x100_jpeg';
+  globals.image.src = cat_original_100x100_jpeg;
+  globals.image_name = 'cat_original_100x100_jpeg';
 
   //image.src = man_profile_300x300_jpeg;
   //image_name = 'man_profile_300x300_jpeg';
@@ -13,8 +11,8 @@ var getImageData = function(callback) {
   //image.src = man_profile_100x100_jpeg;
   //image_name = 'man_profile_100x100_jpeg';
 
-  globals.image.src = man_profile_200x200_jpeg;
-  globals.image_name = 'man_profile_200x200_jpeg';
+  //globals.image.src = man_profile_200x200_jpeg;
+  //globals.image_name = 'man_profile_200x200_jpeg';
 
 	globals.canvas.width = globals.image.width;
 	globals.canvas.height = globals.image.height;
@@ -26,7 +24,7 @@ var getImageData = function(callback) {
     ctx.drawImage(globals.image, 0, 0);
 
     console.log('image_name = ' + globals.image_name);
-    console.log('canvas.width = ' + globals.canvas.width + '. canvas.height = ' + globals.canvas.height);
+    console.log('image.width = ' + globals.image.width + '. image.height = ' + globals.image.height);
     console.log('canvas.width = ' + globals.canvas.width + '. canvas.height = ' + globals.canvas.height);
 
     //return ctx.getImageData(0, 0, image.width, image.height);
@@ -64,9 +62,11 @@ var drawTheMap = function(imagedata, dots_size, dots_color, vertex_speed,
 			if (imagedata.data[(x * 4 + y * 4 * imagedata.width)] < 128) {
 
 				var vertex = new THREE.Vector3();
-				vertex.x = x - imagedata.width / 2;
-				vertex.y = -y + imagedata.height / 2;
-				vertex.z = -Math.random()*500;
+        // The x,y coordinates of where the particle will end up on our canvas.
+        // Decrease x to move drawn map to left. Increase to move right.
+				vertex.x = (x - imagedata.width / 2) - 70;
+				vertex.y = (-y + imagedata.height / 2);
+				vertex.z = (-Math.random()*500);
 
 				vertex.speed = Math.random() / vertex_speed + 0.015;
 
