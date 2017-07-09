@@ -45,7 +45,7 @@ var globals = {
   // threejs
   window_width: null, window_height: null,
   renderer: null, scene: null, camera: null, renderer_width: null, renderer_height: null,
-  particles: null, canvas: null, image: null, centerVector: null,
+  particles: null, canvas: null, image: null, centerVector: null, myRenderFunc: null,
 
   defaults: {
     // Profile who's bio is visible.
@@ -71,7 +71,7 @@ var globals = {
     renderer_canvas_background_color: 0xF0F8FF,
 
     // changes size of dots. lessens the empty space around each dot.
-    dots_size: 4, //3,
+    dots_size: 3, //3,
 
     // changes color of dots.
     // 0x024059 is blueish.
@@ -86,6 +86,18 @@ var globals = {
     // 0 px puts canvas animation in the center of viewport/html body.
     // should be a % to be responsive?
     move_canvas_image_by_px: 80,
+
+    // pixell select strategy:
+    //    pixel array contains 4 values for each pixel: one for each color (RGB)
+    //    and at last one for the Alpha. We only want specific pixels. Select only
+    //    the pixel with less than the specified transparency.
+    //      Default is 128.
+    //      if smaller we get less dots for laura_100x100.jpeg
+    //      255 is too much, almost solid block.
+    //      200 is much better than 128.
+    // laura_150x150: best is 220.
+    // christopher_lane_150x135: best is 180;
+    select_pixels_with_transparency_value_less_than_this_value: 180,
   }
 };
 

@@ -103,18 +103,14 @@ function trr_convert_data_to_html() {
                         'margin: 0; ' +
                         'overflow: hidden; ' +
                         'display: block; ' +
-                        // per: https://stackoverflow.com/questions/39132397/how-can-i-overlay-a-canvas-over-a-paragraph-so-that-its-title-is-shown-when-hove
-                        //'position: relative; ' +
                         'position: fixed; ' +
-                        //'position: absolute' +
                         'z-index: -1; ' +
                         'top: 0; ' + // 15%;
                         'left: 0; ' + // 54%; ' +
                         //'border: 2px solid red;' +
                         '" ' +
          '></canvas>').insertBefore( jQuery( '.entry-header' ) );
-
-  //jQuery('.entry-content').css('opacity', '0.99');
+  // Make the background of the bio text transparent so that we can scoll over the canvas animation.
   jQuery('article').css('opacity', '0.8');
 
   globals.state = {};
@@ -189,9 +185,8 @@ function trr_build_default_view( callback ) {
     antialias: true
   });
 
-  // background color of canvas.
   globals.renderer.setSize(globals.window_width, globals.window_height);
-  // changes size of dots. lessens the empty space around each dot.
+  // background color of canvas.
   globals.renderer.setClearColor(globals.defaults.renderer_canvas_background_color);
 
   globals.scene = new THREE.Scene();
@@ -199,8 +194,8 @@ function trr_build_default_view( callback ) {
   globals.camera = new THREE.OrthographicCamera(
     globals.window_width / - 2,
     globals.window_width / 2,
-    globals.window_width / 2,
-    globals.window_width / - 2,
+    globals.window_height / 2,
+    globals.window_height / - 2,
     1,
     1000 );
 
@@ -210,12 +205,20 @@ function trr_build_default_view( callback ) {
   globals.camera.zoom = 4;
   globals.camera.updateProjectionMatrix();
 
-  getImageData(
+  /* Now that we have our basic scene we need to convert our image into an
+  array of data. Create a new image element and execute the 'drawScene'
+  function when it is loaded.
+  */
+  getTheJpeqImageData(
   /*1-Callback when done*/ function(imagedata) {
   globals.imagedata = imagedata;
-  drawTheMap(globals.imagedata, globals.defaults.dots_size,
+  /* The next step is to draw the image, get the data from the scene, select
+  the pixels we want to keep and store in a scene.particles array and call
+  requestAnimationFrame(renderFunc) to animate/draw the 3D image.
+  */
+  drawTheAnimatedImage(globals.imagedata, globals.defaults.dots_size,
              globals.defaults.dots_color, globals.defaults.vertex_speed,
-             globals.render, globals.scene,
+             globals.myRenderFunc, globals.scene,
   /*2-Callback when done*/ function(particles) {
   globals.particles = particles;
   callback();

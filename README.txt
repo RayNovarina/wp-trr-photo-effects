@@ -156,15 +156,28 @@ var ctx       = canvas.getContext("2d");
 
 canvas.width = png.width;
 canvas.height = png.height;
-The next step is to draw the image, get the data from the scene and finally clearing it. To get the data we will use the getImageData method from the Canvas API.
-This method returns an object with an array in it that contains 4 values for each pixel: one for each color (RGB) and a last one for the Alpha.
+The next step is to draw the image, get the data from the scene and finally
+clearing it. To get the data we will use the getImageData method from the
+Canvas API.
+This method returns an object with an array in it that contains 4 values for
+each pixel: one for each color (RGB) and a last one for the Alpha.
 You can find more infos about the getImageData method here
+
 ctx.drawImage(png, 0, 0);
 var data = ctx.getImageData(0, 0, png.width, png.height);
 ctx.clearRect(0,0,canvas.width, canvas.height);
-We now have an array with the data of every pixel from the image. But we only want specific pixels. In this case I will select only the pixel with no transparency (but you can target all the blue pixels, the darker pixels [...] It's up to you !). To select the pixels we need, we will loop through the Y and the X axis of our image. That's why we have a loop into another one.
-I check if it's four value (Alpha) is over than 128, the average value. (Each value is between 0 and 255).
+
+We now have an array with the data of every pixel from the image. But we only
+want specific pixels. In this case I will select only the pixel with no
+transparency (but you can target all the blue pixels, the darker
+pixels [...] It's up to you !).
+
+To select the pixels we need, we will loop through the Y and the X axis of
+our image. That's why we have a loop into another one.
+I check if it's four value (Alpha) is over than 128, the average value.
+(Each value is between 0 and 255).
 If the Alpha is over 128, I push the pixel into my particles array.
+
 var particles = [];
 for (var y = 0, y2 = data.height; y < y2; y++) {
     for (var x = 0, x2 = data.width; x < x2; x++) {
