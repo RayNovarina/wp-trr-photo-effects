@@ -26,6 +26,9 @@ var getImageData = function(callback) {
     console.log('image_name = ' + globals.image_name);
     console.log('image.width = ' + globals.image.width + '. image.height = ' + globals.image.height);
     console.log('canvas.width = ' + globals.canvas.width + '. canvas.height = ' + globals.canvas.height);
+    console.log('move canvas image: ' +
+                (globals.defaults.move_canvas_image_left ? 'left' : globals.defaults.move_canvas_image_right ? 'right' : 'NO') +
+                ' by ' + globals.defaults.move_canvas_image_by_px + ' pixels.');
 
     //return ctx.getImageData(0, 0, image.width, image.height);
     callback( ctx.getImageData(0, 0, globals.image.width, globals.image.height) );
@@ -64,11 +67,18 @@ var drawTheMap = function(imagedata, dots_size, dots_color, vertex_speed,
 				var vertex = new THREE.Vector3();
         // The x,y coordinates of where the particle will end up on our canvas.
         // Decrease x to move drawn map to left. Increase to move right.
-				vertex.x = (x - imagedata.width / 2) - 70;
-				vertex.y = (-y + imagedata.height / 2);
-				vertex.z = (-Math.random()*500);
+        var x_adjustment = 0;
+        if (globals.defaults.move_canvas_image_left) {
+          x_adjustment = -globals.defaults.move_canvas_image_by_px;
+        } else if (globals.defaults.move_canvas_image_right) {
+          x_adjustment = globals.defaults.move_canvas_image_by_px;
+        }
 
-				vertex.speed = Math.random() / vertex_speed + 0.015;
+				vertex.x = (x - imagedata.width / 2) + x_adjustment;
+				vertex.y = -y + imagedata.height / 2;
+				vertex.z = -Math.random()*500;
+
+				vertex.speed = Math.random() / globals.defaults.vertex_speed + 0.015;
 
 				geometry.vertices.push(vertex);
 			}

@@ -82,6 +82,10 @@ jQuery( jQuery( globals.fixups_target_page_class_ref + ' .entry-content div').to
 //
 jQuery( jQuery( globals.fixups_target_page_class_ref + ' header').toArray()[0] ).attr('style', 'display:none;');
 
+
+//jQuery(jQuery('.page-id-5 .navbar .nav>li>a ').toArray()[0]).css('font-size')
+// "16px"
+
 } else {
   trr_statusLog( "  ..*0a: trr_target_page_fixups(): WP page class '" + globals.fixups_fixups_target_page_class_ref + "' NOT FOUND.'*");
 };

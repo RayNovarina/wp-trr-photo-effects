@@ -53,6 +53,18 @@ function trr_init() {
     console.debug("THREE.js lib NOT loaded");
   }
 
+  globals.window_location_origin = window.location.origin;
+
+  var classes = jQuery('body').attr('class');
+  var page_num_begin = classes.indexOf('page-id-');
+  var page_num = classes.slice( (page_num_begin + 'page-id-'.length), (page_num_begin + classes.slice(page_num_begin).indexOf(' ')) );
+
+  globals.fixups_target_page_num = page_num,
+  globals.fixups_target_page_class_ref = '.page-id-' + globals.fixups_target_page_num; // '.page-id-874',
+
+  trr_statusLog( "  ..*2a: trr_init(): host domain '" + globals.window_location_origin + "' " +
+                 "fixups_target_page_class_ref: '" + globals.fixups_target_page_class_ref + "' *" );
+
   jQuery(window).load(function () {
    window.scrollTo(0,0);
   });
@@ -66,6 +78,23 @@ function trr_convert_data_to_html() {
   //jQuery( '<canvas id="myCanvas" style="width:100%; height:100%; "></canvas>' ).insertBefore( jQuery(globals.photo_effect_class_ref).first() );
   //jQuery( '<canvas id="myCanvas" style="width:500px; height:500px; border: 2px solid red; "></canvas>' ).insertBefore( jQuery( '.entry-content' ) );
 
+  /*
+  canvas {
+    width:100%;
+    height:100%;
+    overflow: hidden;
+
+    display: block;
+    position: fixed;
+    z-index: -1;
+    top: 0; // 40px;
+    left: 0; // 22%;
+
+    //background: #F0F8FF; // no effect
+    border: 2px solid red;
+  }
+  */
+
   jQuery('<canvas id="myCanvas" ' +
                  'style="' +
                         'width: 100%; ' + //44
@@ -74,13 +103,19 @@ function trr_convert_data_to_html() {
                         'margin: 0; ' +
                         'overflow: hidden; ' +
                         'display: block; ' +
+                        // per: https://stackoverflow.com/questions/39132397/how-can-i-overlay-a-canvas-over-a-paragraph-so-that-its-title-is-shown-when-hove
+                        //'position: relative; ' +
                         'position: fixed; ' +
-                        'z-index: 1; ' +
-                        'top: 15%; ' +
-                        'left: 54%; ' +
-                        'border: 2px solid red;' +
+                        //'position: absolute' +
+                        'z-index: -1; ' +
+                        'top: 0; ' + // 15%;
+                        'left: 0; ' + // 54%; ' +
+                        //'border: 2px solid red;' +
                         '" ' +
          '></canvas>').insertBefore( jQuery( '.entry-header' ) );
+
+  //jQuery('.entry-content').css('opacity', '0.99');
+  jQuery('article').css('opacity', '0.8');
 
   globals.state = {};
   globals.photos = jQuery( globals.photo_effect_class_ref ).toArray();
@@ -143,10 +178,11 @@ function trr_build_default_view( callback ) {
 
   trr_statusLog( "  ..*15: trr_init(): Create default bio image from profile " + globals.defaults.active_profile_idx + ".*" );
 
-  globals.renderer_width = window.innerWidth;
-  globals.renderer_height = window.innerHeight;
+  globals.window_width = window.innerWidth,
+  globals.window_height = window.innerHeight;
 
   globals.centerVector = new THREE.Vector3(0, 0, 0);
+  globals.defaults.vertex_speed = 10;
 
   globals.renderer = new THREE.WebGLRenderer({
     canvas: document.getElementById("myCanvas"),
@@ -154,17 +190,17 @@ function trr_build_default_view( callback ) {
   });
 
   // background color of canvas.
-  globals.renderer.setSize(globals.renderer_width, globals.renderer_height);
+  globals.renderer.setSize(globals.window_width, globals.window_height);
   // changes size of dots. lessens the empty space around each dot.
-  globals.renderer.setClearColor(globals.defaults.canvas_background_color);
+  globals.renderer.setClearColor(globals.defaults.renderer_canvas_background_color);
 
   globals.scene = new THREE.Scene();
 
   globals.camera = new THREE.OrthographicCamera(
-    globals.renderer_width / - 2,
-    globals.renderer_width / 2,
-    globals.renderer_height / 2,
-    globals.renderer_height / - 2,
+    globals.window_width / - 2,
+    globals.window_width / 2,
+    globals.window_width / 2,
+    globals.window_width / - 2,
     1,
     1000 );
 

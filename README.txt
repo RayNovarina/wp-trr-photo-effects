@@ -1,4 +1,4 @@
-cd /Applications/MAMP/htdocs/Sites/wordpress-5-trr-staging/wp-content/plugins/trr-photo-effects
+cd /Applications/MAMP/htdocs/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects
 //---------------------------------------------------
 based on:
 https://codepen.io/anon/pen/rwWGME
@@ -20,6 +20,8 @@ github repository:
   https://github.com/RayNovarina/wp-trr-phpto-effects.git
 staging site:
   http://trafficrevenueresults.com/management-team/
+
+login: http://localhost:8888/Sites/wordpress-5-trr-staging/wp-login.php
 
 ===================
 jQuery( '<canvas id="myCanvas" style="width:100%; height:100%; "></canvas>' ).insertBefore( jQuery(globals.photo_effect_class_ref).first() );
@@ -244,3 +246,33 @@ ww = window.innerWidth,
 wh = window.innerHeight;
 
 var centerVector = new THREE.Vector3(0, 0, 0);
+
+==================================
+per: https://davidwalsh.name/convert-canvas-image
+
+To convert an image to canvas, you use a canvas element's context's drawImage method:
+
+// Converts image to canvas; returns new canvas element
+function convertImageToCanvas(image) {
+	var canvas = document.createElement("canvas");
+	canvas.width = image.width;
+	canvas.height = image.height;
+	canvas.getContext("2d").drawImage(image, 0, 0);
+
+	return canvas;
+}
+
+The 0, 0 arguments map to coordinates on the canvas where the image data should be placed.
+
+Convert Canvas to an Image with JavaScript
+
+Assuming modifications to the image have been made, you can easily convert the canvas data to image data with the following snippet:
+
+// Converts canvas to an image
+function convertCanvasToImage(canvas) {
+	var image = new Image();
+	image.src = canvas.toDataURL("image/png");
+	return image;
+}
+
+The code above magically converts the canvas to a PNG data URI!
