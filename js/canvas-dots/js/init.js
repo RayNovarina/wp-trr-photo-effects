@@ -71,49 +71,9 @@ function trr_init() {
 };
 
 function trr_convert_data_to_html() {
-  // Bind events and initialize plugin
-  /*
-  <img class="trr-photo-effect title="photo_url halftone_url"/>
-  */
-  //jQuery( '<canvas id="myCanvas" style="width:100%; height:100%; "></canvas>' ).insertBefore( jQuery(globals.photo_effect_class_ref).first() );
-  //jQuery( '<canvas id="myCanvas" style="width:500px; height:500px; border: 2px solid red; "></canvas>' ).insertBefore( jQuery( '.entry-content' ) );
-
-  /*
-  canvas {
-    width:100%;
-    height:100%;
-    overflow: hidden;
-
-    display: block;
-    position: fixed;
-    z-index: -1;
-    top: 0; // 40px;
-    left: 0; // 22%;
-
-    //background: #F0F8FF; // no effect
-    border: 2px solid red;
-  }
-  */
-
-  jQuery('<canvas id="myCanvas" ' +
-                 'style="' +
-                        'width: 100%; ' + //44
-                        'height: 100%; ' + //84
-                        'padding: 0; ' +
-                        'margin: 0; ' +
-                        'overflow: hidden; ' +
-                        'display: block; ' +
-                        'position: fixed; ' +
-                        'z-index: -1; ' +
-                        'top: 0; ' + // 15%;
-                        'left: 0; ' + // 54%; ' +
-                        //'border: 2px solid red;' +
-                        '" ' +
-         '></canvas>').insertBefore( jQuery( '.entry-header' ) );
-  // Make the background of the bio text transparent so that we can scoll over the canvas animation.
-  jQuery('article').css('opacity', '0.8');
-
   globals.state = {};
+  trr_convert_data_before_main_loop();
+
   globals.photos = jQuery( globals.photo_effect_class_ref ).toArray();
   trr_statusLog( "  ..*13: trr_convert_data_to_html(): START data to html conversion for " + globals.photos.length + " photos.*" );
 
@@ -122,57 +82,26 @@ function trr_convert_data_to_html() {
     return;
   }
   jQuery.each( globals.photos, function( index, el ) {
-    jQuery(el).attr( 'id', ('photo-' + (index + '') ) );
-    jQuery(el).attr('photo-idx', index + '');
-
-    if ( globals.defaults.scroll_events) {
-      // Add scrollMagic hook for this bio.
-      // create a scene
-      // trigger position:
-      //   default: element CROSSES THE MIDDLE of the viewport
-      //   onEnter: element CROSSES THE BOTTOM of the viewport - either scroll up or down.
-      //   onLeave: element
-      //
-      // function callback (event) {
-      //  console.log("Event fired! (" + event.type + ")");
-      // }
-      // add listeners
-      //   scene.on("change update progress start end enter leave", callback);
-
-      new ScrollMagic.Scene({
-        // trigger point is the bio Title line.
-        triggerElement: '.bio-container-for-' + jQuery(el).attr( 'id')
-        + ' .info' + ' .title', // point of execution
-        triggerHook: 'onEnter', // on enter from the bottom.
-        // ,offset: 200
-      })
-      .on('start', function (event) {
-          // event.scrollDirection:
-          //    PAUSED:
-          // event.state:
-          //    DURING  - scroll down
-          //    BEFORE  - scroll up
-          // console.log('event: ' + event.scrollDirection + ': ' + event.state);
-          trr_scroll_trigger( event,
-            (event.state == 'DURING' ? 'moving_up_into_view' :
-             event.state == 'BEFORE' ? 'moving_down_out_of_view' : ''),
-            '.bio-container-for-', '.bio-container-for-' + jQuery(el).attr( 'id') );
-      })
-      .addTo(globals.scrollMagic_controller); // assign the scene to the controller
-    }
-
-    if ( globals.defaults.click_events) {
-      trr_add_click_handler( index, el);
-    }
+    var $el = jQuery(el);
+    $el.attr( 'id', ('photo-' + (index + '') ) );
+    $el.attr('photo-idx', index + '');
+    trr_convert_data_for_each( index, $el );
   });
   trr_statusLog( "  ..*14: trr_init(): END data to html conversion.*" );
 };
 
 function trr_build_default_view( callback ) {
-//callback();
-//return;
+  trr_statusLog( "  ..*15: trr_init(): Create default bio image from photo " + globals.defaults.active_photo_idx + ".*" );
+  trr_build_default_view_before_first_swap_in();
 
-  trr_statusLog( "  ..*15: trr_init(): Create default bio image from profile " + globals.defaults.active_profile_idx + ".*" );
+  // NOTE: upload, scroll event will trigger for 1st bio. Use that event to init bio page.
+  if ( !globals.defaults.scroll_events) {
+    // Put default photo into bio page, make photo animation appear.
+    trr_swap_in_photo( globals.defaults.active_photo_idx, 'appear', 0, '',
+    /*1-Callback when done*/ function() {
+    /*1-*/});
+  }
+};
 
   globals.window_width = window.innerWidth,
   globals.window_height = window.innerHeight;
