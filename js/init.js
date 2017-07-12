@@ -68,8 +68,7 @@ function trr_init( callback ) {
   trr_globals.window_location_origin = window.location.origin,
   trr_globals.window_width = window.innerWidth,
   trr_globals.window_height = window.innerHeight;
-
-
+  
   var classes = jQuery('body').attr('class');
   var page_num_begin = classes.indexOf('page-id-');
   trr_globals.wp_page_id = classes.slice( (page_num_begin + 'page-id-'.length), (page_num_begin + classes.slice(page_num_begin).indexOf(' ')) );
