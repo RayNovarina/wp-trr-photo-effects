@@ -68,7 +68,7 @@ function trr_init( callback ) {
   trr_globals.window_location_origin = window.location.origin,
   trr_globals.window_width = window.innerWidth,
   trr_globals.window_height = window.innerHeight;
-  
+
   var classes = jQuery('body').attr('class');
   var page_num_begin = classes.indexOf('page-id-');
   trr_globals.wp_page_id = classes.slice( (page_num_begin + 'page-id-'.length), (page_num_begin + classes.slice(page_num_begin).indexOf(' ')) );
@@ -152,8 +152,8 @@ function trr_convert_data_to_html( callback ) {
   var last_photo = trr_globals.photos.length - 1;
   jQuery.each( trr_globals.photos, function( index, el ) {
     var $el = jQuery(el);
-    $el.attr( 'id', ('photo-' + (index + '') ) );
-    $el.attr('photo-idx', index + '');
+    $el.attr( 'id', ('trr-pe-photo-' + (index + '') ) );
+    $el.attr( 'trr-pe-photo-idx', index + '' );
     trr_statusLog( "  ..*4k: trr_convert_data_to_html().for_each: index: " + index + ".*" );
     trr_convert_data_for_each_if_dots_effect( index, $el,
     /*2a-Resume here when done*/ function() {
