@@ -91,9 +91,9 @@ function trr_convert_data_before_main_loop_for_dots_effect( callback ) {
 function trr_convert_data_for_each_for_dots_effect( index, $el, callback ) {
   trr_statusLog( "  ..*4.1k: trr_convert_data_for_each_for_dots_effect() index = " + index + ".*" );
 
-  $el.trr_halftone_dots( { action: 'create' },
+  $el.trr_halftone_dots( { action: 'create', photo_idx: index },
   /*1-Resume here when done*/ function() {
-  $el.trr_halftone_dots( { action: 'init' },
+  $el.trr_halftone_dots( { action: 'init', photo_idx: index },
   /*2-Resume here when done*/ function() {
   callback();
   /*2-*/});/*1-*/});
