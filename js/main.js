@@ -8,7 +8,7 @@
 //
 
 // NOTE: globals.js executes first.
-jQuery( window ).on( "load", function() {
+//jQuery( window ).on( "load", function() {
   console.log( "  ..*2a-uponLoad: " + trr_globals.scripts_remaining_to_finish_loading_count +
                " Scripts remaining to finish loading.*" );
 
@@ -16,14 +16,15 @@ jQuery( window ).on( "load", function() {
   if ( trr_globals.scripts_remaining_to_finish_loading_count < 1 ) {
     trr_globals = {};
   } else {
+    trr_globals.loader_delay = 3000;
     console.log( "  ..*2b-uponLoad: *Trouble to come?*" + trr_globals.scripts_remaining_to_finish_loading_count +
-                 " Scripts remaining to finish loading.*" );
-    trr_globals.loader_delay = 1000;
+                 " Scripts remaining to finish loading. Delay " + trr_globals.loader_delay + " ms before continuing. *" );
   }
   setTimeout(function() {
     trr_statusLog( "  ..*2-domReady*" );
     console.log( "  ..*2c-domReady: " + (typeof trr_globals.scripts_remaining_to_finish_loading_count !== 'undefined' ? trr_globals.scripts_remaining_to_finish_loading_count : '0') +
                  " Scripts remaining to finish loading.*" );
+    trr_globals = {};
 
     trr_create_globals(
     /*1-Resume here when done*/ function() {
@@ -42,4 +43,4 @@ jQuery( window ).on( "load", function() {
     trr_statusLog( "  ..*2c-Init done*" );
     /*5-*/});/*4-*/});/*3-*/});/*2-*/});/*1-*/});
   }, trr_globals.loader_delay);
-});
+//});

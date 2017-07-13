@@ -124,12 +124,6 @@ CanvasDotsPlugin.prototype = {
     trr_statusLog( "  ..*6.1d.6-CanvasDotsPlugin init for el.id: '" + $el.attr('id') + "' action: '" + parms.action + "' *");
 
     $el.data('$el', $el );
-    // per: https://api.jquery.com/data/
-    // Writing a statement like $( "body" ).data( { "my-name": "aValue" } ).data(); will return { myName: "aValue" }.
-    // When the data attribute is an object (starts with '{') or array (starts with '[') then jQuery.parseJSON is used to parse the string; it must follow valid JSON syntax including quoted property names. If the value isn't parseable as a JavaScript value, it is left as a string.
-    // $el.data( "trr-pe-dots_effect", state: {} );
-
-    // NOTE: it seems that there is a processing delay in these new THREE.xxx funcs, use callbacks to pace??
     $el.data('centerVector', new THREE.Vector3(0, 0, 0) );
     $el.data('renderer', new THREE.WebGLRenderer(
                                       { canvas: document.getElementById(trr_globals.dots_effect.animation_container_dom_id),
