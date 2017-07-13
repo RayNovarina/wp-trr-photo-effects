@@ -18,7 +18,7 @@ jQuery( window ).on( "load", function() {
   } else {
     console.log( "  ..*2b-uponLoad: *Trouble to come?*" + trr_globals.scripts_remaining_to_finish_loading_count +
                  " Scripts remaining to finish loading.*" );
-    trr_globals.loader_delay = 2000;
+    trr_globals.loader_delay = 1000;
   }
   setTimeout(function() {
     trr_statusLog( "  ..*2-domReady*" );

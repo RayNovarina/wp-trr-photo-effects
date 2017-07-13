@@ -1105,3 +1105,119 @@ var trr_dots_effect_sceneData = {
   },
 };
 */
+
+//=============================
+
+getTheJpeqImageData: function( plugin_instance, $el, parms, callback ) {
+  /* Convert our image into an array of data. Create a new image element and
+  execute the 'drawScene' function when it is loaded.
+  */
+  trr_statusLog( "  ..*6.1d.11-dots_effect_getTheJpeqImageData: action '" + parms.action +
+                 "' for el.id: '" + $el.attr('id') + "' *");
+
+  //image = document.createElement("img");
+  var img = new Image();
+  //jQuery(img).one( 'dots_effect_getTheJpeqImageData_file_load_completed', jQuery.proxy( plugin_instance.createPixels, plugin_instance ) );
+
+  // NOTE: single image file is defined in images/image_data_uri.js
+  //       all images are in images/image_data.js
+  image_name = trr_dots_effect_image_info[ parms.photo_idx ].image_name;
+  img.src  = trr_dots_effect_image_info[ parms.photo_idx ].image_data_as_uri;
+  //img.src = this.$el.data('pixellate-image-src');
+
+  //if(img.complete) {
+  //  trr_statusLog( "  ..*6.1d.11.a-dots_effect_getTheJpeqImageData: action '" + parms.action +
+  //                 "' for el.id: '" + $el.attr('id') + "'. file '" + image_name + "' loaded.*");
+  //  jQuery(img).trigger( 'dots_effect_getTheJpeqImageData_file_load_completedd' );
+  //}
+
+  var canvas = document.createElement("canvas");
+  canvas.width = image.width;
+  canvas.height = image.height;
+
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(image, 0, 0);
+
+  trr_statusLog( "  ..*6.1d.11.b: image_name = " + image_name);
+  trr_statusLog( "  ..*6.1d.11.b: image.width = " + image.width + ". image.height = " + image.height);
+  trr_statusLog( "  ..*6.1d.11.b: canvas.width = " + canvas.width + ". canvas.height = " + canvas.height);
+  trr_statusLog( "  ..*6.1d.11.b: move canvas image: " +
+              (trr_globals.dots_effect.defaults.move_canvas_image_left ? 'left' : trr_globals.dots_effect.defaults.move_canvas_image_right ? 'right' : 'NO') +
+              ' by ' + trr_globals.dots_effect.defaults.move_canvas_image_by_px + ' pixels.');
+
+  callback( ctx.getImageData(0, 0, image.width, image.height) );
+  return;
+}
+
+=======================
+
+// NOTE: action helper methods, listed alphabetically.
+hlpr_getTheJpeqImageData: function( $el, parms, callback ) {
+  /* Convert our image into an array of data. Create a new image element and
+  execute the 'drawScene' function when it is loaded.
+  */
+  trr_statusLog( "  ..*6.1d.11-getTheJpeqImageData: action '" + parms.action +
+                 "' for el.id: '" + $el.attr('id') + "' *");
+
+  //image = document.createElement("img");
+  // NOTE: single image file is defined in images/image_data_uri.js
+  //       all images are in images/image_data.js
+  //image_name = trr_dots_effect_image_info[ parms.photo_idx ].image_name;
+  //image.src  = trr_dots_effect_image_info[ parms.photo_idx ].image_data_as_uri;
+
+  /*
+  // per: https://stackoverflow.com/questions/1977871/check-if-an-image-is-loaded-no-errors-in-javascript
+  var img = new Image($(this)); // creating image element
+
+      img.onload = function() { // trigger if the image was loaded
+          console.log($(this).attr('src') + ' - done!');
+          // imgLoaded(imgElement) {
+          imgElement.complete && imgElement.naturalHeight !== 0;
+      }
+
+      img.onerror = function() { // trigger if the image wasn't loaded
+          console.log($(this).attr('src') + ' - error!');
+      }
+
+      img.onAbort = function() { // trigger if the image load was abort
+          console.log($(this).attr('src') + ' - abort!');
+      }
+
+      img.src = $(this).attr('src'); // pass src to image object
+  */
+
+  //var image = new Image();
+  //jQuery(image).one( 'dots_effect_getTheJpeqImageData_file_load_completed', jQuery.proxy( this.hlpr_imageFileLoaded, this ) );
+
+  // NOTE: single image file is defined in images/image_data_uri.js
+  //       all images are in images/image_data.js
+  //$el.data( 'image_name', trr_dots_effect_image_info[ parms.photo_idx ].image_name );
+  //image.src  = trr_dots_effect_image_info[ parms.photo_idx ].image_data_as_uri;
+
+  //if( image.complete ) {
+  //  trr_statusLog( "  ..*6.1d.11.a-dots_effect_getTheJpeqImageData: action '" + parms.action +
+  //                 "' for el.id: '" + $el.attr('id') + "'. file '" + $el.data( 'image_name') + "' loaded.*");
+  //  jQuery(image).trigger( 'dots_effect_getTheJpeqImageData_file_load_completed' );
+  //}
+
+  //----------------------------------------
+  /*canvas = document.createElement("canvas");
+  canvas.width = image.width;
+  canvas.height = image.height;
+
+  var ctx = canvas.getContext("2d");
+  ctx.drawImage(image, 0, 0);
+
+  trr_statusLog( "  ..*6.1d.11.a: image_name = " + image_name);
+  trr_statusLog( "  ..*6.1d.11.a: image.width = " + image.width + ". image.height = " + image.height);
+  trr_statusLog( "  ..*6.1d.11.a: canvas.width = " + canvas.width + ". canvas.height = " + canvas.height);
+  trr_statusLog( "  ..*6.1d.11.a: move canvas image: " +
+              (trr_globals.dots_effect.defaults.move_canvas_image_left ? 'left' : trr_globals.dots_effect.defaults.move_canvas_image_right ? 'right' : 'NO') +
+              ' by ' + trr_globals.dots_effect.defaults.move_canvas_image_by_px + ' pixels.');
+
+  callback( this, ctx.getImageData(0, 0, image.width, image.height) );
+  return;
+  */
+},
+
+===================
