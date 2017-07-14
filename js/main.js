@@ -7,23 +7,28 @@
 // once the entire page (images or iframes), not just the DOM, is ready.
 //
 
-// NOTE: globals.js executes first.
+jQuery( document ).ready(function() {
 //jQuery( window ).on( "load", function() {
-  console.log( "  ..*2a-uponLoad: " + trr_globals.scripts_remaining_to_finish_loading_count +
-               " Scripts remaining to finish loading.*" );
+  //console.log( "  ..*2a-uponLoad: " + trr_globals.scripts_remaining_to_finish_loading_count +
+  //             " Scripts remaining to finish loading.*" );
 
-  trr_globals.loader_delay = 0;
-  if ( trr_globals.scripts_remaining_to_finish_loading_count < 1 ) {
+  var trr_loader_delay = 0,
+      trr_loader_remaining = 0;
+  if ( trr_globals.scripts_remaining_to_finish_loading_count == 'undefined' ||
+       trr_globals.scripts_remaining_to_finish_loading_count < 1 ) {
     trr_globals = {};
   } else {
-    trr_globals.loader_delay = 3000;
-    console.log( "  ..*2b-uponLoad: *Trouble to come?*" + trr_globals.scripts_remaining_to_finish_loading_count +
-                 " Scripts remaining to finish loading. Delay " + trr_globals.loader_delay + " ms before continuing. *" );
+    trr_loader_remaining = trr_globals.scripts_remaining_to_finish_loading_count;
+    trr_loader_delay = trr_loader_remaining * 200;
   }
   setTimeout(function() {
-    trr_statusLog( "  ..*2-domReady*" );
-    console.log( "  ..*2c-domReady: " + (typeof trr_globals.scripts_remaining_to_finish_loading_count !== 'undefined' ? trr_globals.scripts_remaining_to_finish_loading_count : '0') +
-                 " Scripts remaining to finish loading.*" );
+    if ( trr_loader_delay > 0 ) {
+      console.log( "  ..*2c-domReady: " + trr_loader_remaining + " Scripts remained to finish loading before we delayed " +
+                   trr_loader_delay + " ms before continuing. Now there are " +
+                  trr_globals.scripts_remaining_to_finish_loading_count || '0' + " remaining. *" );
+    } else {
+      console.log( "  ..*2c-domReady* " );
+    }
     trr_globals = {};
 
     trr_create_globals(
@@ -42,5 +47,5 @@
     /*5-Resume here when done*/ function() {
     trr_statusLog( "  ..*2c-Init done*" );
     /*5-*/});/*4-*/});/*3-*/});/*2-*/});/*1-*/});
-  }, trr_globals.loader_delay);
-//});
+  }, trr_loader_delay);
+});

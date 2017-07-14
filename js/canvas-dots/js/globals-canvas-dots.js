@@ -5,7 +5,7 @@ function trr_globals_for_dots_effect( callback ) {
     loaded: true,
     enabled: false,
     pluginName: 'trr_halftone_dots',
-    pluginInstanceName: 'trr_plugin_halftone_dots',
+    pluginInstanceName: 'trr_plugin_trr_halftone_dots',
 
     photo_effect_class: 'trr-pe-canvas-dots',
     photo_effect_class_ref: '.trr-pe-canvas-dots',
@@ -16,14 +16,12 @@ function trr_globals_for_dots_effect( callback ) {
     renderer: null, scene: null, camera: null, renderer_width: null, renderer_height: null,
     particles: null, canvas: null, image: null, centerVector: null, myRenderFunc: null,
 
-    animation_container_dom_id: 'myCanvas',
-
     defaults: {
       // Profile who's bio is visible.
-      active_profile_idx: 0,
+      active_photo_idx: 0,
 
       // Scrolling results in change of bio.
-      scroll_events: false,
+      scroll_events: true,
 
       // Click on profile photo results in change of bio.
       click_events: false,

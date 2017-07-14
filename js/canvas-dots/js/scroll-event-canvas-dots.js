@@ -2,7 +2,7 @@
 // Params:
 //  direction (string): moving_up_into_view
 //                      moving_down_out_of_view
-function exp_scroll_trigger( event, direction, type, tag ) {
+function trr_dots_effect_scroll_trigger( event, direction, type, tag ) {
   var profile_idx_triggering_event = parseInt( jQuery( globals.bio_containers_class_ref ).find( tag ).attr('profile-idx') ),
       active_bio_idx = parseInt( jQuery( globals.bio_containers_class_ref ).attr('active_bio_idx') ),
       active_bio = jQuery( jQuery('.bio-container').toArray()[ active_bio_idx ] ),
@@ -56,7 +56,3 @@ function exp_scroll_trigger( event, direction, type, tag ) {
     /*2-*/})/*1-*/});
   }
 };
-
-// new ScrollMagic.Scene({ triggerElement: ".Screen", duration: 100, offset: iScreenSize })
-// http://scrollmagic.io/docs/ScrollMagic.Scene.html#triggerHook
-//

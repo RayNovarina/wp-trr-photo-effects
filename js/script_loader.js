@@ -22,7 +22,6 @@ var trr_globals = {
       'https://7975c016.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/globals.js',
       'https://7975c016.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/lib.js',
       'https://7975c016.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/init.js',
-      'https://7975c016.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/click-event.js',
       'https://7975c016.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/scroll-event.js',
       'https://7975c016.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/page-fixups.js',
       'https://7975c016.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/main.js',
@@ -34,6 +33,7 @@ var trr_globals = {
       'https://7975c016.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/canvas-dots/js/management-page-fixes-canvas-dots.js',
       'https://7975c016.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/canvas-dots/js/init-canvas-dots.js',
       'https://7975c016.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/canvas-dots/js/lib-canvas-dots.js',
+      'https://7975c016.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/canvas-dots/js/scroll-event-canvas-dots.js',
       'https://7975c016.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/canvas-dots/images/image-data-canvas-dots.js',
     ],
 

@@ -47,6 +47,8 @@ function trr_create_globals( callback ) {
     fixups_target_page_num: '',
     fixups_target_page_class_ref: '', // '.page-id-874',
 
+    animation_container_dom_id: '',
+
     defaults: {
       // Scrolling results in change of bio.
       scroll_events: false,
@@ -64,12 +66,12 @@ function trr_create_globals( callback ) {
 
 // called by main() after page load() and DOM ready()
 function trr_globals_add_effect_extensions( callback ) {
-  trr_statusLog( "  ..*3a-globals_add_effect_extensions() *" );
+  //trr_statusLog( "  ..*3a-globals_add_effect_extensions() *" );
   trr_globals_if_dots_effect(
   /*1-Resume here when done*/ function() {
   trr_globals_if_pixellate_effect(
   /*2-Resume here when done*/ function() {
-  trr_statusLog( "  ..*3b-global data done*" );
+  //trr_statusLog( "  ..*3b-global data done*" );
   callback();
   /*2-*/});/*1-*/});
 };
