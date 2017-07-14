@@ -54,27 +54,26 @@ function trr_make_swap_in_parms( parms, photo_idx, action, action_delay ) {
       $swap_in_photo = jQuery( trr_globals.photos[ photo_idx ] ),
       $swap_out_photo = $active_photo;
 
-  //  // NOTE: leave undefined as init case indicator.
-  //  //trr_globals.animation_container.attr( 'active_photo_idx', '' );
-  //  trr_globals.animation_container.attr( 'active_id', '*init*');
-  //  trr_globals.animation_container.attr( 'effect_handler_for_appear', '*init*');
-  //  trr_globals.animation_container.attr( 'effect_handler_for_disappear', '*init*');
-  //  trr_globals.animation_container.attr( 'effect_handler_for_fade_in', '*init*');
-  //  trr_globals.animation_container.attr( 'effect_handler_for_fade_out', '*init*');
-  //
-  //  $el.attr( 'id', ('trr-pe-photo-' + (index + '') ) );
-  //  $el.attr( 'trr-pe-photo-idx', index + '' );
-
   jQuery.extend( parms, { photo_idx: photo_idx, action: action,
                           action_delay: action_delay,
                           $swap_in_photo: $swap_in_photo,
                           $swap_out_photo: $swap_out_photo,
                         }
                );
+  parms.handler_name_for_action = trr_globals.dots_effect.pluginName;
+  parms.handler_name_for_action = trr_hlpr_action2handler( $swap_in_photo, parms.action );
 
   trr_make_swap_in_parms_if_dots_effect( parms );
   trr_make_swap_in_parms_if_pixellate_effect( parms );
   return parms;
+};
+
+function trr_hlpr_action2handler( $photo, action ) {
+  //  trr_globals.animation_container.attr( 'effect_handler_for_appear', '*init*');
+  //  trr_globals.animation_container.attr( 'effect_handler_for_disappear', '*init*');
+  //  trr_globals.animation_container.attr( 'effect_handler_for_fade_in', '*init*');
+  //  trr_globals.animation_container.attr( 'effect_handler_for_fade_out', '*init*');
+  return trr_globals.dots_effect.pluginName;
 };
 
 function trr_make_swap_in_parms_if_dots_effect( parms ) {
@@ -137,14 +136,19 @@ function trr_animation_effect( parms, callback ) {
   /*2-*/});/*1-*/});
 };
 
-function trr_i_am_the_effects_handler_for_this( parms ) {
+function trr_i_am_the_effects_handler_for_this( photo_idx, action, handler_name ) {
+  //  trr_globals.animation_container.attr( 'effect_handler_for_appear', '*init*');
+  //  trr_globals.animation_container.attr( 'effect_handler_for_disappear', '*init*');
+  //  trr_globals.animation_container.attr( 'effect_handler_for_fade_in', '*init*');
+  //  trr_globals.animation_container.attr( 'effect_handler_for_fade_out', '*init*');
   return true;
 };
 
+// parms.handler_name_for_action
 function trr_animation_effect_if_dots_effect( parms, callback ) {
   if ( trr_globals.dots_effect.enabled &&
        typeof trr_animation_effect_for_dots_effect !== 'undefined') {
-    if ( trr_i_am_the_effects_handler_for_this( parms ) ) {
+    if ( trr_i_am_the_effects_handler_for_this( parms.photo_idx, parms.action, trr_globals.dots_effect.pluginName ) ) {
       trr_animation_effect_for_dots_effect( parms,
       /*1-Resume here when done*/ function() {
       callback();

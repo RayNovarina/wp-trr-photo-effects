@@ -200,8 +200,9 @@ function trr_convert_data_to_html( callback ) {
     var $el = jQuery(el);
     $el.attr( 'id', ('trr-pe-photo-' + (index + '') ) );
     $el.attr( 'trr-pe-photo-idx', index + '' );
+    trr_hlpr_add_action_handlers( index, $el );
     trr_statusLog( "  ..*4k: trr_convert_data_to_html().for_each: index: " + index + ".*" );
-    // NOTE: not all plugin tagged photos are going to be using this effect. i.e. trr_globals.photos vs. trr_globals.dots_effect.photos
+    // NOTE: not all plugin tagged photos are going to be using the same effects.
     trr_convert_data_for_each_if_dots_effect( index, $el,
     /*2a-Resume here when done*/ function() {
     trr_convert_data_for_each_if_pixellate_effect( index, $el,
@@ -218,6 +219,13 @@ function trr_convert_data_to_html( callback ) {
     /*2d-*/});/*2c-*/});/*2b-*/});/*2a-*/});
   }); // end of jQuery.each()
   /*2-*/});/*1-*/});
+};
+
+function trr_hlpr_add_action_handlers( index, $el ) {
+  $el.attr( 'effect_handler_for_appear', trr_globals.dots_effect.pluginName );
+  $el.attr( 'effect_handler_for_disappear', trr_globals.dots_effect.pluginName );
+  $el.attr( 'effect_handler_for_fade_in', trr_globals.dots_effect.pluginName );
+  $el.attr( 'effect_handler_for_fade_out', trr_globals.dots_effect.pluginName );
 };
 
 function trr_add_scroll_event_for_each_if_dots_effect( index, $el, callback) {
@@ -272,17 +280,18 @@ function trr_add_scroll_event( effect_event_parms ) {
 };
 
 function trr_build_default_view( callback ) {
-  trr_statusLog( "  ..*4m: trr_init(): Create default bio animation from profile " + trr_globals.defaults.active_photo_idx + ".*" );
-  // NOTE: not all plugin tagged photos are going to be using this effect. i.e. trr_globals.photos vs. trr_globals.dots_effect.photos
-  trr_build_default_view_before_first_swap_in_if_dots_effect(
+  var default_view_photo_idx = trr_globals.defaults.active_photo_idx,
+      default_view_swap_in_action = 'appear';
+  trr_statusLog( "  ..*4m: trr_init(): Create default bio animation from profile " + default_view_photo_idx + ".*" );
+  trr_build_default_view_before_first_swap_in_if_dots_effect( default_view_photo_idx, default_view_swap_in_action,
   /*1-Resume here when done*/ function() {
-  trr_build_default_view_before_first_swap_in_if_pixellate_effect(
+  trr_build_default_view_before_first_swap_in_if_pixellate_effect( default_view_photo_idx, default_view_swap_in_action,
   /*2-Resume here when done*/ function() {
 
   // NOTE: upload, scroll event will trigger for 1st bio. Use that event to init bio page.
   if ( !trr_globals.defaults.scroll_events) {
     // Put default profile into bio page, make photo animation appear.
-    trr_swap_in_photo( trr_globals.defaults.active_photo_idx, 'appear', 0,
+    trr_swap_in_photo( default_view_photo_idx, default_view_swap_in_action, 0,
     /*2a-Resume here when done*/ function() {
     callback();
     /*2a-*/});
@@ -317,10 +326,13 @@ function trr_convert_data_before_main_if_loop_pixellate_effect( callback ) {
   callback();
 };
 
-function trr_build_default_view_before_first_swap_in_if_dots_effect( callback ) {
+function trr_build_default_view_before_first_swap_in_if_dots_effect( photo_idx, action, callback ) {
+  // NOTE: not all plugin tagged photos are going to be using this effect. i.e. trr_globals.photos vs. trr_globals.dots_effect.photos
   if ( trr_globals.dots_effect.enabled &&
-       typeof trr_build_default_view_before_first_swap_in_for_dots_effect !== 'undefined') {
-    trr_build_default_view_before_first_swap_in_for_dots_effect(
+       typeof trr_build_default_view_before_first_swap_in_for_dots_effect !== 'undefined' &&
+       trr_i_am_the_effects_handler_for_this( photo_idx, action, trr_globals.dots_effect.pluginName )
+      ) {
+    trr_build_default_view_before_first_swap_in_for_dots_effect( photo_idx, action,
     /*1-Resume here when done*/ function() {
     callback();
     /*1-*/});
@@ -329,10 +341,10 @@ function trr_build_default_view_before_first_swap_in_if_dots_effect( callback ) 
   callback();
 };
 
-function trr_build_default_view_before_first_swap_in_if_pixellate_effect( callback ) {
+function trr_build_default_view_before_first_swap_in_if_pixellate_effect( photo_idx, action, callback ) {
   if ( trr_globals.pixellate_effect.enabled &&
        typeof trr_build_default_view_before_first_swap_in_for_pixellate_effect !== 'undefined') {
-    trr_build_default_view_before_first_swap_in_for_pixellate_effect(
+    trr_build_default_view_before_first_swap_in_for_pixellate_effect( photo_idx, action,
     /*1-Resume here when done*/ function() {
     callback();
     /*1-*/});

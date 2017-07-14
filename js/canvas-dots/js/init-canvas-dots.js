@@ -80,7 +80,7 @@ function trr_add_scroll_event_for_each_for_dots_effect( index, $el ) {
 };
 
 
-function trr_build_default_view_before_first_swap_in_for_dots_effect( callback ) {
+function trr_build_default_view_before_first_swap_in_for_dots_effect( default_view_photo_idx, default_view_action, callback ) {
   trr_statusLog( "  ..*4.1m: trr_build_default_view_before_first_swap_in_for_dots_effect().*" );
 
   callback();
