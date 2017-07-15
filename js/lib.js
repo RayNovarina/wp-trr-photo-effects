@@ -1,7 +1,7 @@
 
-// Update the active photo slot with the specified photo.
+// Animate the specified photo in the animation_container.
 // params: photo_idx: integer
-//         action: string - 'appear' or 'disappear' or 'init'
+//         action: string - 'fade_in' or 'appear'
 //         action_delay: ms to delay before performing action.
 //         callback: code to resume when done
 function trr_swap_in_photo( photo_idx, action, action_delay, event_name, /*Code to resume when done*/ callback ) {
@@ -9,10 +9,7 @@ function trr_swap_in_photo( photo_idx, action, action_delay, event_name, /*Code 
   trr_make_swap_in_parms( parms, photo_idx, action, action_delay );
   trr_statusLog( "  ..*6a: trr_swap_in_photo for photo_idx " + parms.photo_idx +
                    ". Action: '" + parms.action + "'. Handler: '" + parms.handler_name_for_action +
-                   "'" + //". Active photoId: " + parms.dest_photo.attr('active_id') +
-                   //". New photoId: " + parms.src_photo.attr('id') +
-                   //". ScrollTo photoId:" + parms.scroll_to_photo.attr('active_id') +
-                   ".*" );
+                   "' .*" );
 
   trr_globals.animation_container.attr( 'active_photo_idx', parms.photo_idx + '' );
   trr_globals.animation_container.attr( 'active_id', parms.$swap_in_photo.attr( 'id' ) );
@@ -32,7 +29,7 @@ function trr_swap_in_photo( photo_idx, action, action_delay, event_name, /*Code 
 };
 
 // params: photo_idx: integer,
-//         action: 'appear' or 'disappear'
+//         action: 'fade_out' or 'disappear'
 //         action_delay: ms to delay after performing action.
 //         callback: code to resume when done
 function trr_swap_out_photo( photo_idx, action, action_delay, event_name, /*Code to resume when done*/ callback ) {
@@ -45,34 +42,21 @@ function trr_swap_out_photo( photo_idx, action, action_delay, event_name, /*Code
   trr_make_swap_in_parms( parms, photo_idx, action, action_delay );
   trr_statusLog( "  ..*6b.2: trr_swap_out_photo for photo_idx " + parms.photo_idx +
                    ". Action: '" + parms.action + "'. Handler: '" + parms.handler_name_for_action +
-                   "'" + //". Active photoId: " + parms.dest_photo.attr('active_id') +
-                   //". New photoId: " + parms.src_photo.attr('id') +
-                   //". ScrollTo photoId:" + parms.scroll_to_photo.attr('active_id') +
-                   ".*" );
+                   "'. *" );
 
-  /*
-  trr_globals.animation_container.attr( 'active_photo_idx', parms.photo_idx + '' );
-  trr_globals.animation_container.attr( 'active_id', parms.$swap_in_photo.attr( 'id' ) );
-  trr_hlpr_add_action_handlers( parms.photo_idx, trr_globals.animation_container )
-
-    if (action == 'explode') {
-      // explode halftone image in the bio page. NOTE: this is the normal state of
-      // the pixel array for an inactive profile.
-      dest_profile.pixellate( 'out', src_bio );
-    }
+  trr_swap_out_update_animation_area_before_action( parms,
+    /*1-Resume here when done*/ function() {
     setTimeout(function() {
-      // Put the updated pixel array of the specified bio (active) and put it back
-      // in its profile container.
-      // globals.pixellate_pixels_container_class_ref
-      src_bio.find( '.bio-pixell-array' ).insertAfter( dest_profile.find('.bio-photo') );
-      jQuery( globals.bio_containers_class_ref ).attr('active_profile_idx', '');
-*/
+      trr_animation_effect( parms,
+      /*1a-Resume here when done*/ function() {
       callback();
-//      return;
-//    }, action_delay);
+      return;
+      /*1a-*/});
+    }, action_delay);
+    /*1-*/});
 };
 
-
+//------------------------------------------------------------------------------
 function trr_make_swap_in_parms( parms, photo_idx, action, action_delay ) {
   trr_statusLog( "  ..*6b.3: trr_make_swap_in_parms(): photo_idx " + photo_idx + ". Action: " + action + ".*" );
   // if first time/init, active id is undefined.
@@ -127,6 +111,7 @@ function trr_make_swap_in_parms_if_pixellate_effect( parms ) {
   return {};
 };
 
+//------------------------------------------------------------------------------
 function trr_swap_in_update_animation_area_before_action( parms, callback ) {
   trr_statusLog( "  ..*6c: trr_swap_in_update_animation_area_before_action(): photo_idx " + parms.photo_idx + ". Action: " + parms.action + ".*" );
   trr_swap_in_update_animation_area_before_action_if_dots_effect( parms,
@@ -161,8 +146,16 @@ function trr_swap_in_update_animation_area_before_action_if_pixellate_effect( pa
   callback();
 };
 
+//------------------------------------------------------------------------------
+function trr_swap_out_update_animation_area_before_action( parms, callback ) {
+  trr_statusLog( "  ..*6d: trr_swap_out_update_animation_area_before_action(): photo_idx " + parms.photo_idx + ". Action: " + parms.action + ".*" );
+  // TBD
+  callback();
+};
+
+//------------------------------------------------------------------------------
 function trr_animation_effect( parms, callback ) {
-  trr_statusLog( "  ..*6d: trr_animation_effect(): photo_idx " + parms.photo_idx + ". Action: " + parms.action + ".*" );
+  trr_statusLog( "  ..*6e: trr_animation_effect(): photo_idx " + parms.photo_idx + ". Action: " + parms.action + ".*" );
   trr_animation_effect_if_dots_effect( parms,
   /*1-Resume here when done*/ function() {
   trr_animation_effect_if_pixellate_effect( parms,

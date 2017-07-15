@@ -89,6 +89,17 @@ CanvasDotsPlugin.prototype = {
     trr_statusLog( "  ..*6.1d.10-CanvasDotsPlugin appear '" + parms.action +
                    "' for el.id: '" + this.$el.attr('id') + "' *");
 
+    // NOTE: each time we scroll back to a photo, we need to animate it again.
+    
+    //$el.data('camera').position.x = 7;
+    //$el.data('camera').position.y = $el.data('camera').position.y;
+    // camera 'home' position.
+    $el.data('camera').position.set( 7, 0, 4 );
+    //$el.data('camera').lookAt( $el.data('centerVector') );
+    //$el.data('scene').add( $el.data('camera') );
+    //$el.data('camera').zoom = 4;
+    //$el.data('camera').updateProjectionMatrix();
+
     // The next step is to call
     //  requestAnimationFrame(renderFunc) to animate/draw the 3D image.
     // per: https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
@@ -116,6 +127,9 @@ CanvasDotsPlugin.prototype = {
     var $el = this.$el;
     trr_statusLog( "  ..*6.1d.11-CanvasDotsPlugin disappear '" + parms.action +
                    "' for el.id: '" + this.$el.attr('id') + "' *");
+    // per: https://davidburgos.blog/how-to-change-a-threejs-scene/
+    //trr_globals.animation_container.remove()
+
     callback( this );
     return;
   },
@@ -138,6 +152,7 @@ CanvasDotsPlugin.prototype = {
                                   trr_globals.window_width / - 2, trr_globals.window_width / 2,
                                   trr_globals.window_height / 2,  trr_globals.window_height / - 2,
                                   1, 1000 ) );
+    // camera 'home' position.
     $el.data('camera').position.set( 7, 0, 4 );
     $el.data('camera').lookAt( $el.data('centerVector') );
     $el.data('scene').add( $el.data('camera') );
@@ -158,9 +173,9 @@ CanvasDotsPlugin.prototype = {
       return;
     }
     $el = self.$el;
-    $el.data('imagedata', imagedata);
+    $el.data('imagedata_len', imagedata.data.length);
     trr_statusLog( "  ..*6.1d.6a-CanvasDotsPlugin init for el.id: '" + $el.attr('id') + "' action: '" + parms.action +
-                   "'. imagedata.length: '" + $el.data('imagedata').length +
+                   "'. imagedata.length: '" + $el.data('imagedata_len') +
                    "'. for file name: '" + $el.data('image_name') + "'. *");
     /* The next step is to get the data from the scene, select
        the pixels we want to keep and store in a scene.particles array so we can
@@ -171,7 +186,7 @@ CanvasDotsPlugin.prototype = {
     $el.data('vertex_speed', trr_globals.dots_effect.defaults.vertex_speed);
 
     self.hlpr_initSceneData( $el, parms,
-      $el.data('imagedata'), $el.data('dots_size'),
+      imagedata, $el.data('dots_size'),
       $el.data('dots_color'), $el.data('vertex_speed'),
       $el.data('scene'),
     /*2-Callback when done*/ function( self, scene ) {

@@ -62,22 +62,28 @@ function trr_convert_data_for_each_for_dots_effect( index, $el, callback ) {
 };
 
 
-function trr_add_scroll_event_for_each_for_dots_effect( index, $el ) {
+function trr_add_scroll_event_for_each_for_dots_effect( photo_idx, $el ) {
   if ( !trr_globals.defaults.scroll_events || !trr_globals.dots_effect.defaults.scroll_events) {
     return null;
   }
-  trr_statusLog( "  ..*4.1l: trr_add_scroll_event_for_each_for_dots_effect() index = " + index + ".*" );
+  var img_position = $el.position(),
+      img_height = $el.height(),
+      offset_y = 0; // img_position.top + img_height;
+  trr_statusLog( "  ..*4.1l: trr_add_scroll_event_for_each_for_dots_effect() photo_idx: " + photo_idx +
+                 " photo.position.top: '" + img_position.top + "' photo.height: '" + img_height + "' *" );
 
   var effect_event_parms = {
     handler_name_for_action: trr_globals.dots_effect.pluginName,
-    photo_idx: index,
+    photo_idx: photo_idx,
     triggerElement_selector: "#" + $el.attr('id'),
+    triggerElement_offset_y: offset_y,
   };
 
   trr_statusLog( "  ..*4.1l.1: trr_add_scroll_event_for_each_for_dots_effect() effect_event_parms:" +
                  " photo_idx: " + effect_event_parms.photo_idx +
-                 " handler_name_for_action: '" + effect_event_parms.handler_name_for_action +
-                 "'. triggerElement_selector: '" + effect_event_parms.triggerElement_selector +
+                 ".  handler_name_for_action: '" + effect_event_parms.handler_name_for_action +
+                 "'.  triggerElement_selector: '" + effect_event_parms.triggerElement_selector +
+                 "'.  triggerElement_offset_y: '" + effect_event_parms.triggerElement_offset_y +
                  "'. *" );
   return effect_event_parms;
 };

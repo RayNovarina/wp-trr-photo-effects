@@ -257,7 +257,7 @@ function trr_add_scroll_event( effect_event_parms ) {
       //+ ' .info' + ' .title', // point of execution
       triggerElement: effect_event_parms.triggerElement_selector, // point of execution
       triggerHook: 'onEnter', // on enter from the bottom.
-      // ,offset: 200
+      offset: effect_event_parms.triggerElement_offset
   })
   .on('start', function (event) {
       // event.scrollDirection:
