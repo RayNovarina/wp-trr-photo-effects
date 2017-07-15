@@ -1,7 +1,7 @@
 
 function trr_init( callback ) {
   // console.clear();
-  console.log("************************ 4a: trr_init( scroll_events: " + trr_globals.defaults.scroll_events + ") ************************");
+  console.log("************************ ..*4a: trr_init( scroll_events: " + trr_globals.defaults.scroll_events + ") ************************");
   // jQuery:
   if (typeof jQuery !== 'undefined') {
     // jQuery is loaded
@@ -221,16 +221,10 @@ function trr_convert_data_to_html( callback ) {
   /*2-*/});/*1-*/});
 };
 
-function trr_hlpr_add_action_handlers( index, $el ) {
-  $el.attr( 'effect_handler_for_appear', trr_globals.dots_effect.pluginName );
-  $el.attr( 'effect_handler_for_disappear', trr_globals.dots_effect.pluginName );
-  $el.attr( 'effect_handler_for_fade_in', trr_globals.dots_effect.pluginName );
-  $el.attr( 'effect_handler_for_fade_out', trr_globals.dots_effect.pluginName );
-};
-
 function trr_add_scroll_event_for_each_if_dots_effect( index, $el, callback) {
   if ( trr_globals.dots_effect.enabled &&
-       typeof trr_add_scroll_event_for_each_for_dots_effect !== 'undefined') {
+       typeof trr_add_scroll_event_for_each_for_dots_effect !== 'undefined' &&
+       trr_hlpr_i_am_the_effects_handler_for_this( index, 'scroll_event', trr_globals.dots_effect.pluginName ) ) {
     trr_add_scroll_event( trr_add_scroll_event_for_each_for_dots_effect( index, $el ) );
   }
   callback();
@@ -248,7 +242,7 @@ function trr_add_scroll_event( effect_event_parms ) {
   if ( effect_event_parms == null ) {
     return;
   }
-  trr_statusLog( "  ..*4m: trr_add_scroll_event( effect: " + effect_event_parms.effect_name + ") for photo_idx: " + effect_event_parms.photo_idx + ".*" );
+  trr_statusLog( "  ..*4m: trr_add_scroll_event( effect: " + effect_event_parms.handler_name_for_action + ") for photo_idx: " + effect_event_parms.photo_idx + ".*" );
 
   // Add scrollMagic hook for this photo.
   // create a scene
@@ -259,7 +253,9 @@ function trr_add_scroll_event( effect_event_parms ) {
   //
   new ScrollMagic.Scene({
       // trigger point is the bio Title line.
-      triggerElement: effect_event_parms.triggerElement, // point of execution
+      // triggerElement: '.bio-container-for-' + jQuery(el).attr( 'id')
+      //+ ' .info' + ' .title', // point of execution
+      triggerElement: effect_event_parms.triggerElement_selector, // point of execution
       triggerHook: 'onEnter', // on enter from the bottom.
       // ,offset: 200
   })
@@ -270,11 +266,9 @@ function trr_add_scroll_event( effect_event_parms ) {
       //    DURING  - scroll down
       //    BEFORE  - scroll up
       // console.log('event: ' + event.scrollDirection + ': ' + event.state);
-  trr_scroll_trigger( event,
-      ( event.state == 'DURING' ? 'moving_up_into_view' :
-        event.state == 'BEFORE' ? 'moving_down_out_of_view' : ''),
-        effect_event_parms.effect_tag, effect_event_parms.event_container_class_ref
-      );
+  trr_scroll_trigger( event, effect_event_parms.photo_idx,
+      event.state == 'DURING' ? 'moving_up_into_view' : event.state == 'BEFORE' ? 'moving_down_out_of_view' : '',
+      effect_event_parms.handler_name_for_action );
   })
   .addTo(trr_globals.scrollMagic_controller); // assign the scene to the controller
 };
@@ -282,7 +276,7 @@ function trr_add_scroll_event( effect_event_parms ) {
 function trr_build_default_view( callback ) {
   var default_view_photo_idx = trr_globals.defaults.active_photo_idx,
       default_view_swap_in_action = 'appear';
-  trr_statusLog( "  ..*4m: trr_init(): Create default bio animation from profile " + default_view_photo_idx + ".*" );
+  trr_statusLog( "  ..*4n: trr_init(): Create default bio animation from profile " + default_view_photo_idx + ".*" );
   trr_build_default_view_before_first_swap_in_if_dots_effect( default_view_photo_idx, default_view_swap_in_action,
   /*1-Resume here when done*/ function() {
   trr_build_default_view_before_first_swap_in_if_pixellate_effect( default_view_photo_idx, default_view_swap_in_action,
@@ -330,7 +324,7 @@ function trr_build_default_view_before_first_swap_in_if_dots_effect( photo_idx, 
   // NOTE: not all plugin tagged photos are going to be using this effect. i.e. trr_globals.photos vs. trr_globals.dots_effect.photos
   if ( trr_globals.dots_effect.enabled &&
        typeof trr_build_default_view_before_first_swap_in_for_dots_effect !== 'undefined' &&
-       trr_i_am_the_effects_handler_for_this( photo_idx, action, trr_globals.dots_effect.pluginName )
+       trr_hlpr_i_am_the_effects_handler_for_this( photo_idx, action, trr_globals.dots_effect.pluginName )
       ) {
     trr_build_default_view_before_first_swap_in_for_dots_effect( photo_idx, action,
     /*1-Resume here when done*/ function() {

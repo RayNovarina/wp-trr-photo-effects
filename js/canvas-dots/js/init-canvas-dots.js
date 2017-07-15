@@ -69,13 +69,16 @@ function trr_add_scroll_event_for_each_for_dots_effect( index, $el ) {
   trr_statusLog( "  ..*4.1l: trr_add_scroll_event_for_each_for_dots_effect() index = " + index + ".*" );
 
   var effect_event_parms = {
-    effect_name: trr_globals.dots_effect.pluginName,
+    handler_name_for_action: trr_globals.dots_effect.pluginName,
     photo_idx: index,
-    triggerElement: $el,
-    effect_tag: '',
-    event_container_class_ref: '',
+    triggerElement_selector: "#" + $el.attr('id'),
   };
 
+  trr_statusLog( "  ..*4.1l.1: trr_add_scroll_event_for_each_for_dots_effect() effect_event_parms:" +
+                 " photo_idx: " + effect_event_parms.photo_idx +
+                 " handler_name_for_action: '" + effect_event_parms.handler_name_for_action +
+                 "'. triggerElement_selector: '" + effect_event_parms.triggerElement_selector +
+                 "'. *" );
   return effect_event_parms;
 };
 

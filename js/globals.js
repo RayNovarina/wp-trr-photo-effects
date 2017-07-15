@@ -5,23 +5,26 @@ function trr_statusLog( msg ) {
     console.log('************* INIT DONE ******************');
     console.log('******************************************');
     return;
-  } else if (msg.indexOf('..*16  Clicked on') != -1) {
+
+  } else if (msg.indexOf('..*8:') != -1) {
     console.log(' ');
     console.log('******************************************');
     console.log('*************** CLICK ********************');
     console.log('******************************************');
-  } else if ( (msg.indexOf('..*16a: swap_in_bio') != -1) ||
-              (msg.indexOf('..*16b: swap_in_bio') != -1) ) {
+
+  } else if ( msg.indexOf('..*6a:') != -1) {
     console.log(' ');
     console.log('******************************************');
     console.log('************** SWAP IN *******************');
     console.log('******************************************');
-  } else if (msg.indexOf('..*17: swap_out_bio') != -1) {
+
+  } else if (msg.indexOf('..*6b:') != -1) {
     console.log(' ');
     console.log('******************************************');
     console.log('************** SWAP OUT ******************');
     console.log('******************************************');
-  } else if (msg.indexOf('..*18: Scrolled ') != -1) {
+
+  } else if (msg.indexOf('..*7:') != -1) {
     console.log(' ');
     console.log('******************************************');
     console.log('************* SCROLLED TO ****************');
@@ -51,7 +54,7 @@ function trr_create_globals( callback ) {
 
     defaults: {
       // Scrolling results in change of bio.
-      scroll_events: false,
+      scroll_events: true,
       // Click on profile photo results in change of bio.
       click_events: false,
       // Photo's which is being animated in the animation_container.
