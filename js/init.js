@@ -78,12 +78,12 @@ function trr_init( callback ) {
   trr_globals.target_page_references = jQuery( target_page_class_ref );
   trr_globals.plugin_references = jQuery( plugin_class_ref );
 
-  //trr_statusLog( "  ..*4b: trr_init(): host domain '" + trr_globals.window_location_origin + "' " +
-  //               "  fixups_target_page_class_ref '" + target_page_class_ref +
-  //               "'. References = " + trr_globals.target_page_references.length +
-  //               ". plugin class ref '" + plugin_class_ref +
-  //               "'. References = " + trr_globals.plugin_references.length +
-  //               "*");
+  trr_statusLog( "  ..*4b: trr_init(): host domain '" + trr_globals.window_location_origin + "' " +
+                 "  fixups_target_page_class_ref '" + target_page_class_ref +
+                 "'. References = " + trr_globals.target_page_references.length +
+                 ". plugin class ref '" + plugin_class_ref +
+                 "'. References = " + trr_globals.plugin_references.length +
+                 "*");
 
   if ( trr_globals.target_page_references.length == 0 ||
        trr_globals.plugin_references.length == 0 ) {

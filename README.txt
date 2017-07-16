@@ -24,6 +24,37 @@ staging site:
 login: http://localhost:8888/Sites/wordpress-5-trr-staging/wp-login.php
 
 ===================
+$ cd /Applications/MAMP/htdocs/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects
+$ npm and gulp notes:
+npm config set prefix /usr/local
+sudo chown -R $(whoami) $(npm config get prefix)/{lib/node_modules,bin,share}
+npm install gulp -g
+npm install --save-dev gulp
+sudo npm install --save-dev gulp-uglify
+sudo npm install gulp-minify --save-dev
+sudo npm install gulp-minify-html --save-dev
+sudo npm install browser-sync --save-dev
+
+create gulpfile.js:
+  // including plugins
+  var gulp = require('gulp')
+      , minifyHtml = require("gulp-minify-html");
+  // task
+  gulp.task('minify-html', function () {
+      gulp.src('./Html/*.html') // path to your files
+      .pipe(minifyHtml())
+      .pipe(gulp.dest('path/to/destination'));
+  });
+
+Verify:
+$ gulp
+  [21:05:43] Using gulpfile /Applications/MAMP/htdocs/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/gulpfile.js
+  [21:05:43] Task 'default' is not in your gulpfile
+
+Run from command line using the gulp.task name:
+$ gulp minify-html
+
+===================
 jQuery( '<canvas id="myCanvas" style="width:100%; height:100%; "></canvas>' ).insertBefore( jQuery(globals.photo_effect_class_ref).first() );
 
 ========================
