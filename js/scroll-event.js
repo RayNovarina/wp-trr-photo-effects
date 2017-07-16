@@ -11,7 +11,7 @@ function trr_scroll_trigger( event, photo_idx, direction, handler_name_for_actio
   //   attr( 'effect_handler_for_scroll_event', trr_globals.dots_effect.pluginName );
 
   var photo_idx_triggering_event = parseInt( photo_idx ),
-    animation_container_photo_idx = trr_globals.animation_container.attr( 'active_photo_idx'),
+    animation_container_photo_idx = trr_globals.active_photo_idx,
     scrolling_photo_idx_out_of_view = '?',
     scrolling_photo_idx_into_view = '?',
     scroll_result_msg = '?';
@@ -48,12 +48,18 @@ function trr_scroll_trigger( event, photo_idx, direction, handler_name_for_actio
                    scrolling_photo_idx_into_view + ") = current(" +
                    animation_container_photo_idx + "). Ignore scroll event. *");
   } else {
-    trr_swap_out_photo( scrolling_photo_idx_out_of_view, 'disappear', 1500, 'scroll_event',
+    trr_swap_out_photo( scrolling_photo_idx_out_of_view, 'disappear', 3500, 'scroll_event',
     /*1-Callback when done*/ function() {
+
+// try to put this in trr_swap_in_update_animation_area_before_action_for_dots_effect() ??
+jQuery( trr_globals.photos[ scrolling_photo_idx_out_of_view ] ).data('$animation_container').css('display', 'none');
+
     // swapped in scrolled to photo into animation_container, implode/recreate the new photo image.
     trr_swap_in_photo( scrolling_photo_idx_into_view, 'appear', 0, 'scroll_event',
+//trr_swap_in_photo( scrolling_photo_idx_out_of_view, 'appear', 0, 'scroll_event',
     /*2-Callback when done*/ function() {
-    /*2-*/})/*1-*/});
+    /*2-*/})
+    /*1-*/});
   }
 };
 

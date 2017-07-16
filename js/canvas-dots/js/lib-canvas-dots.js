@@ -1,33 +1,12 @@
-function trr_make_swap_in_parms_for_dots_effect( parms ) {
-  //trr_statusLog( "  ..*6.1b: trr_make_swap_in_parms_for_dots_effect(): photo_idx " + parms.photo_idx + ". Action: " + parms.action + ".*" );
-  /*var input_parms = { photo_idx: photo_idx, action: action,
-                      action_delay: action_delay, effect: effect  },
-trr_globals.photos
-    trr_globals.animation_container.attr( 'profile-idx', trr_globals.active_photo_idx + '' );
-    trr_globals.animation_container.attr( 'active_id', '*init*');
-
-  */
-  //parms.active_photo_idx = parseInt( trr_globals.animation_container.attr( 'active_photo_idx' ) ),
-  //parms.src_photo = jQuery( trr_globals.photos[ parms.active_photo_idx ] ),
-  //parms.dest_photo = jQuery( trr_globals.photos[ parms.photo_idx ] ),
-  //parms.scroll_to_photo = parms.dest_photo;
-  return parms;
-};
-
 function trr_swap_in_update_animation_area_before_action_for_dots_effect( parms, callback ) {
-  trr_statusLog( "  ..*6.1c: trr_swap_in_update_animation_area_before_action_for_dots_effect(): photo_idx " + parms.photo_idx + ". Action: " + parms.action + ".*" );
+  trr_statusLog( "  ..*6.1c.1: trr_swap_in_update_animation_area_before_action_for_dots_effect(): photo_idx " + parms.photo_idx + ". Action: " + parms.action + ".*" );
   callback();
 };
 
 function trr_animation_effect_for_dots_effect( parms, callback ) {
   trr_statusLog( "  ..*6.1d: trr_animation_effect_for_dots_effect(): photo_idx " + parms.photo_idx + ". Action: " + parms.action + ".*" );
 
-  // src_profile.pixellate( 'in', dest_bio );
-  // jQuery.data( this, trr_globals.dots_effect.pluginInstanceName ).action
-  // jQuery.each( trr_globals.photos, function( index, el ) {
-  // $el.trr_halftone_dots( { action: 'create', photo_idx: index },
-  // swap_in_photo: jQuery( trr_globals.photos[ parms.photo_idx ] ),
-  parms.$swap_in_photo.trr_halftone_dots( parms,
+  (parms.$swap_in_photo || parms.$swap_out_photo).trr_halftone_dots( parms,
   /*1-Resume here when done*/ function( return_info ) {
   callback( return_info );
   return;
@@ -90,15 +69,13 @@ CanvasDotsPlugin.prototype = {
                    "' for el.id: '" + this.$el.attr('id') + "' *");
 
     // NOTE: each time we scroll back to a photo, we need to animate it again.
-    
-    //$el.data('camera').position.x = 7;
-    //$el.data('camera').position.y = $el.data('camera').position.y;
-    // camera 'home' position.
-    $el.data('camera').position.set( 7, 0, 4 );
-    //$el.data('camera').lookAt( $el.data('centerVector') );
-    //$el.data('scene').add( $el.data('camera') );
-    //$el.data('camera').zoom = 4;
-    //$el.data('camera').updateProjectionMatrix();
+    $el.data('rendering_direction', 'in');
+    $el.data('stop_rendering_when_x_reaches_this_pos', 0.001); // 0.001);
+    $el.data('begin_rendering', true);
+    $el.data('stopped_rendering', false);
+    $el.attr('render_action', parms.action);
+
+    $el.data('$animation_container').css('display', 'block');
 
     // The next step is to call
     //  requestAnimationFrame(renderFunc) to animate/draw the 3D image.
@@ -128,9 +105,17 @@ CanvasDotsPlugin.prototype = {
     trr_statusLog( "  ..*6.1d.11-CanvasDotsPlugin disappear '" + parms.action +
                    "' for el.id: '" + this.$el.attr('id') + "' *");
     // per: https://davidburgos.blog/how-to-change-a-threejs-scene/
-    //trr_globals.animation_container.remove()
+    //animation_container.remove()
 
-    callback( this );
+    $el.data('rendering_direction', 'out');
+    $el.data('stop_rendering_when_x_reaches_this_pos', 7);
+    $el.data('stopped_rendering', false);
+    $el.attr('render_action', parms.action);
+
+    //$el.data('$animation_container').css('display', 'none');
+
+    var return_info = requestAnimationFrame( this.hlpr_renderFunc.bind(this) );
+    callback( this, return_info );
     return;
   },
 
@@ -140,10 +125,38 @@ CanvasDotsPlugin.prototype = {
     trr_statusLog( "  ..*6.1d.6-CanvasDotsPlugin init for el.id: '" + $el.attr('id') + "' action: '" + parms.action + "' *");
 
     $el.data('$el', $el );
+    var animation_container_dom_id = 'trr-pe-animation-container-for-' + $el.attr('id'),
+        $animation_container =
+        //jQuery('body').append(
+        jQuery(
+               '<canvas  id="' + animation_container_dom_id + '" ' +
+                        'class="' + animation_container_dom_id + '" ' +
+                        'style="' +
+                            'display: none; ' +
+                            'width: 100%; ' + //44
+                            'height: 100%; ' + //84
+                            'padding: 0; ' +
+                            'margin: 0; ' +
+                            'overflow: hidden; ' +
+                            'position: fixed; ' +
+                            'z-index: -1; ' +
+                            'top: 0; ' + // 15%;
+                            'left: 0; ' + // 54%; ' +
+                            //'border: 2px solid red;' +
+                            '" ' +
+                '></canvas>')
+                .insertBefore( jQuery( '.entry-header' ) );
+    $el.data('$animation_container', $animation_container );
+    $el.data('animation_container_dom_id', animation_container_dom_id );
+    //$animation_container.attr( 'effect_handler_for_appear', '*init*');
+    //$animation_container.attr( 'effect_handler_for_disappear', '*init*');
+    //$animation_container.attr( 'effect_handler_for_fade_in', '*init*');
+    //$animation_container.attr( 'effect_handler_for_fade_out', '*init*');
+
     $el.data('centerVector', new THREE.Vector3(0, 0, 0) );
     $el.data('renderer', new THREE.WebGLRenderer(
-                                      { canvas: document.getElementById(trr_globals.dots_effect.animation_container_dom_id),
-                                        antialias: true } ) );
+                { canvas: document.getElementById( $el.data('animation_container_dom_id') ),
+                  antialias: true } ) );
     $el.data('renderer').setSize(trr_globals.window_width, trr_globals.window_height);
     // background color of canvas.
     $el.data('renderer' ).setClearColor(trr_globals.dots_effect.defaults.renderer_canvas_background_color);
@@ -325,23 +338,47 @@ CanvasDotsPlugin.prototype = {
 
   hlpr_renderFunc: function(a) {
     var $el = this.$el;
-    //trr_statusLog( "  ..*6.1d.93-CanvasDotsPlugin renderFunc: action '" + $el.attr('render_action') +
-    //               "' for el.id: '" + $el.attr('id') +
-    //               "' camera.position.x: '" + $el.data('camera').position.x +
-    //               "' camera.position.y: '" + $el.data('camera').position.y +
-    //               "' *");
+    if ( $el.data('begin_rendering') ) {
+      trr_statusLog( "  ..*6.1d.93-CanvasDotsPlugin renderFunc: action '" + $el.attr('render_action') +
+                    "' for el.id: '" + $el.attr('id') +
+                    "' BEGIN rendering at " +
+                    " camera.position.x: '" + $el.data('camera').position.x +
+                    "' camera.position.y: '" + $el.data('camera').position.y +
+                    "' stop_rendering_when_x_reaches_this_pos: " + $el.data('stop_rendering_when_x_reaches_this_pos') +
+                    "' *");
+      $el.data('begin_rendering', false);
+    } else {
+      //trr_statusLog( "  ..*6.1d.94: camera.position.x: '" + $el.data('camera').position.x + "' camera.position.y: '" + $el.data('camera').position.y + "' *");
+    }
 
     // HACK: to stop animation loop? - else we just render forever.
-    // NOTE: we know we animate from the right to the center vector of x=0, y=0.
-    if ( $el.data('camera').position.x > 0.001 ) {
-      requestAnimationFrame( this.hlpr_renderFunc.bind(this) );
-    } else {
+    if ( $el.data('stopped_rendering') ) {
       return;
     }
 
+    // NOTE: we know we animate from the right to the center vector of x=0, y=0.
+    if ( ($el.data('rendering_direction') == 'in' && $el.data('camera').position.x < $el.data('stop_rendering_when_x_reaches_this_pos')) ||
+         ( $el.data('rendering_direction') == 'out' && $el.data('camera').position.x > $el.data('stop_rendering_when_x_reaches_this_pos')) ) {
+      $el.data('stopped_rendering', true);
+      trr_statusLog( "  ..*6.1d.95-CanvasDotsPlugin renderFunc: action '" + $el.attr('render_action') +
+                     "' for el.id: '" + $el.attr('id') +
+                     "' STOPPED rendering at " +
+                     " camera.position.x: '" + $el.data('camera').position.x +
+                     "' camera.position.y: '" + $el.data('camera').position.y +
+                     "' stop_rendering_when_x_reaches_this_pos: " + $el.data('stop_rendering_when_x_reaches_this_pos') +
+                     "' *");
+    }
+
+    requestAnimationFrame( this.hlpr_renderFunc.bind(this) );
+
     $el.data('particles').geometry.verticesNeedUpdate = true;
-    $el.data('camera').position.x += ( 0 - $el.data('camera').position.x) * 0.06;
-    $el.data('camera').position.y += ( 0 - $el.data('camera').position.y) * 0.06;
+    if ( $el.data('rendering_direction') == 'in') {
+      $el.data('camera').position.x += ( 0 - $el.data('camera').position.x) * 0.06;
+      $el.data('camera').position.y += ( 0 - $el.data('camera').position.y) * 0.06;
+    } else {
+      $el.data('camera').position.x += ( 0 + $el.data('camera').position.x) * 0.06;
+      $el.data('camera').position.y += ( 0 + $el.data('camera').position.y) * 0.06;
+    }
     $el.data('camera').lookAt( $el.data('centerVector') );
 
     $el.data('renderer').render( $el.data('scene'), $el.data('camera') );

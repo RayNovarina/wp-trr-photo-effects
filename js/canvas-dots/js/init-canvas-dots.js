@@ -44,7 +44,11 @@ function trr_convert_data_before_main_loop_for_dots_effect( callback ) {
     });
   };
   //------ END: Add jQuery function --------------------------------------------
+
   //----------------------------------------------------------------------------
+  // NOTE: code goes where? I guess we need a short code to indicate begin of bio area?
+  // Make the background of the bio text transparent so that we can scoll over the canvas animation.
+  jQuery('article').css('opacity', '0.8');
 
   callback();
 };
@@ -68,7 +72,7 @@ function trr_add_scroll_event_for_each_for_dots_effect( photo_idx, $el ) {
   }
   var img_position = $el.position(),
       img_height = $el.height(),
-      offset_y = 0; // img_position.top + img_height;
+      offset_y = img_height * 2;
   trr_statusLog( "  ..*4.1l: trr_add_scroll_event_for_each_for_dots_effect() photo_idx: " + photo_idx +
                  " photo.position.top: '" + img_position.top + "' photo.height: '" + img_height + "' *" );
 

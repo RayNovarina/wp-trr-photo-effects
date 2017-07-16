@@ -9,25 +9,25 @@ function trr_statusLog( msg ) {
   } else if (msg.indexOf('..*8:') != -1) {
     console.log(' ');
     console.log('******************************************');
-    console.log('*************** CLICK ********************');
+    console.log('********* Start CLICK Event **************');
     console.log('******************************************');
 
   } else if ( msg.indexOf('..*6a:') != -1) {
     console.log(' ');
     console.log('******************************************');
-    console.log('************** SWAP IN *******************');
+    console.log('*********** Start SWAP IN ****************');
     console.log('******************************************');
 
   } else if (msg.indexOf('..*6b:') != -1) {
     console.log(' ');
     console.log('******************************************');
-    console.log('************** SWAP OUT ******************');
+    console.log('********** Start SWAP OUT ****************');
     console.log('******************************************');
 
   } else if (msg.indexOf('..*7:') != -1) {
     console.log(' ');
     console.log('******************************************');
-    console.log('************* SCROLLED TO ****************');
+    console.log('******** Start SCROLL Event **************');
     console.log('******************************************');
   }
   console.log(msg);

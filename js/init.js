@@ -136,53 +136,6 @@ function trr_init( callback ) {
     }
   }
 
-  /*
-    canvas {
-      width:100%;
-      height:100%;
-      overflow: hidden;
-
-      display: block;
-      position: fixed;
-      z-index: -1;
-      top: 0; // 40px;
-      left: 0; // 22%;
-
-      //background: #F0F8FF; // no effect
-      border: 2px solid red;
-    }
-  */
-
-  trr_globals.animation_container_dom_id = 'trr-pe-animation-container';
-  trr_globals.animation_container =
-    jQuery('<canvas  id="' + trr_globals.dots_effect.animation_container_dom_id + '" ' +
-                    'style="' +
-                        'width: 100%; ' + //44
-                        'height: 100%; ' + //84
-                        'padding: 0; ' +
-                        'margin: 0; ' +
-                        'overflow: hidden; ' +
-                        'display: block; ' +
-                        'position: fixed; ' +
-                        'z-index: -1; ' +
-                        'top: 0; ' + // 15%;
-                        'left: 0; ' + // 54%; ' +
-                        //'border: 2px solid red;' +
-                        '" ' +
-            '></canvas>').insertBefore( jQuery( '.entry-header' ) );
-  // NOTE: code goes where? I guess we need a short code to indicate begin of bio area?
-  // Make the background of the bio text transparent so that we can scoll over the canvas animation.
-  jQuery('article').css('opacity', '0.8');
-
-  trr_globals.animation_container.addClass( trr_globals.animation_container_dom_id );
-  // NOTE: leave undefined as init case indicator.
-  //trr_globals.animation_container.attr( 'active_photo_idx', '' );
-  trr_globals.animation_container.attr( 'active_id', '*init*');
-  trr_globals.animation_container.attr( 'effect_handler_for_appear', '*init*');
-  trr_globals.animation_container.attr( 'effect_handler_for_disappear', '*init*');
-  trr_globals.animation_container.attr( 'effect_handler_for_fade_in', '*init*');
-  trr_globals.animation_container.attr( 'effect_handler_for_fade_out', '*init*');
-
   window.scrollTo(0,0);
   callback();
 };
@@ -200,7 +153,7 @@ function trr_convert_data_to_html( callback ) {
     var $el = jQuery(el);
     $el.attr( 'id', ('trr-pe-photo-' + (index + '') ) );
     $el.attr( 'trr-pe-photo-idx', index + '' );
-    trr_hlpr_add_action_handlers( index, $el );
+    trr_hlpr_add_action_handlers( $el );
     trr_statusLog( "  ..*4k: trr_convert_data_to_html().for_each: index: " + index + ".*" );
     // NOTE: not all plugin tagged photos are going to be using the same effects.
     trr_convert_data_for_each_if_dots_effect( index, $el,
@@ -257,7 +210,7 @@ function trr_add_scroll_event( effect_event_parms ) {
       //+ ' .info' + ' .title', // point of execution
       triggerElement: effect_event_parms.triggerElement_selector, // point of execution
       triggerHook: 'onEnter', // on enter from the bottom.
-      offset: effect_event_parms.triggerElement_offset
+      offset: effect_event_parms.triggerElement_offset_y
   })
   .on('start', function (event) {
       // event.scrollDirection:
@@ -285,7 +238,7 @@ function trr_build_default_view( callback ) {
   // NOTE: upload, scroll event will trigger for 1st bio. Use that event to init bio page.
   if ( !trr_globals.defaults.scroll_events) {
     // Put default profile into bio page, make photo animation appear.
-    trr_swap_in_photo( default_view_photo_idx, default_view_swap_in_action, 0,
+    trr_swap_in_photo( default_view_photo_idx, default_view_swap_in_action, 'build_default_view', 0,
     /*2a-Resume here when done*/ function() {
     callback();
     /*2a-*/});
