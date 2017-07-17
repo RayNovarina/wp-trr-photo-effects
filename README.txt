@@ -55,6 +55,17 @@ Run from command line using the gulp.task name:
 $ gulp minify-html
 
 ===================
+https://harp-canvas-dots-94037.herokuapp.com/trr_photo_effects.min.js
+http://localhost:8888/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/dist/0.0.1/trr_photo_effects.min.js?ver=0.0.1
+
+<!-- -->
+<div style="display: none;">
+  <script
+    src="https://7975c016.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/dist/0.0.1/trr_photo_effects.min.js?ver=0.0.1">
+  </script>
+</div>
+=========================
+
 jQuery( '<canvas id="myCanvas" style="width:100%; height:100%; "></canvas>' ).insertBefore( jQuery(globals.photo_effect_class_ref).first() );
 
 ========================

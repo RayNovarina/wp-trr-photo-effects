@@ -1,29 +1,8 @@
 {
-  "name": "trr-photo-effects",
+  "name": "wp-trr-photo-effects-94037",
   "version": "1.0.0",
-  "description": "WP profile photo scroll effects.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/RayNovarina/wp-trr-photo-effects.git"
-  },
-  "author": "rnova",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/RayNovarina/wp-trr-photo-effects/issues"
-  },
-  "homepage": "https://github.com/RayNovarina/wp-trr-photo-effects#readme",
-  "devDependencies": {
-    "browser-sync": "^2.18.12",
-    "gulp": "^3.9.1",
-    "gulp-concat": "^2.6.1",
-    "gulp-concat-util": "^0.5.5",
-    "gulp-jshint": "^2.0.4",
-    "gulp-minify": "^1.0.0",
-    "gulp-minify-html": "^1.0.6",
-    "gulp-uglify": "^3.0.0"
+  "description": "online repository for trr-photo-effects",
+  "dependencies": {
+    "harp": "*"
   }
 }

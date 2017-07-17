@@ -136,6 +136,11 @@ function trr_init( callback ) {
     }
   }
 
+  //----------------------------------------------------------------------------
+  // NOTE: code goes where? I guess we need a short code to indicate begin of bio area?
+  // Make the background of the bio text transparent so that we can scoll over the canvas animation.
+  jQuery('article').css('opacity', '0.8');
+
   window.scrollTo(0,0);
   callback();
 };

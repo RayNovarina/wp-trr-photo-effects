@@ -54,7 +54,7 @@ function trr_create_globals( callback ) {
 
     defaults: {
       // Scrolling results in change of bio.
-      scroll_events: true,
+      scroll_events: false,
       // Click on profile photo results in change of bio.
       click_events: false,
       // Photo's which is being animated in the animation_container.
@@ -69,12 +69,12 @@ function trr_create_globals( callback ) {
 
 // called by main() after page load() and DOM ready()
 function trr_globals_add_effect_extensions( callback ) {
-  //trr_statusLog( "  ..*3a-globals_add_effect_extensions() *" );
+  trr_statusLog( "  ..*3a-globals_add_effect_extensions() *" );
   trr_globals_if_dots_effect(
   /*1-Resume here when done*/ function() {
   trr_globals_if_pixellate_effect(
   /*2-Resume here when done*/ function() {
-  //trr_statusLog( "  ..*3b-global data done*" );
+  trr_statusLog( "  ..*3b-global data done*" );
   callback();
   /*2-*/});/*1-*/});
 };

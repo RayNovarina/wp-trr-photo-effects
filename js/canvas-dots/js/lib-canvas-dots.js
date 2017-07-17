@@ -3,8 +3,8 @@ function trr_swap_in_update_animation_area_before_action_for_dots_effect( parms,
   callback();
 };
 
-function trr_animation_effect_for_dots_effect( parms, callback ) {
-  trr_statusLog( "  ..*6.1d: trr_animation_effect_for_dots_effect(): photo_idx " + parms.photo_idx + ". Action: " + parms.action + ".*" );
+function trr_animation_for_dots_effect( parms, callback ) {
+  trr_statusLog( "  ..*6.1d: trr_animation_for_dots_effect(): photo_idx " + parms.photo_idx + ". Action: " + parms.action + ".*" );
 
   (parms.$swap_in_photo || parms.$swap_out_photo).trr_halftone_dots( parms,
   /*1-Resume here when done*/ function( return_info ) {
@@ -128,10 +128,9 @@ CanvasDotsPlugin.prototype = {
     var animation_container_dom_id = 'trr-pe-animation-container-for-' + $el.attr('id'),
         $animation_container =
         //jQuery('body').append(
-        jQuery(
-               '<canvas  id="' + animation_container_dom_id + '" ' +
-                        'class="' + animation_container_dom_id + '" ' +
-                        'style="' +
+        jQuery( '<canvas  id="' + animation_container_dom_id + '" ' +
+                         'class="' + animation_container_dom_id + '" ' +
+                         'style="' +
                             'display: none; ' +
                             'width: 100%; ' + //44
                             'height: 100%; ' + //84

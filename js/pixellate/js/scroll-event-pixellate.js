@@ -2,7 +2,7 @@
 // Params:
 //  direction (string): moving_up_into_view
 //                      moving_down_out_of_view
-function trr_dots_effect_scroll_trigger( event, direction, type, tag ) {
+function trr_pixellate_effect_scroll_trigger( event, direction, type, tag ) {
   var profile_idx_triggering_event = parseInt( jQuery( globals.bio_containers_class_ref ).find( tag ).attr('profile-idx') ),
       active_bio_idx = parseInt( jQuery( globals.bio_containers_class_ref ).attr('active_bio_idx') ),
       scrolling_profile_idx_out_of_view = '?',
@@ -36,11 +36,11 @@ function trr_dots_effect_scroll_trigger( event, direction, type, tag ) {
 
   var scrolling_bio_into_view = jQuery( jQuery('.bio-container').toArray()[ scrolling_profile_idx_into_view ] );
 
-  exp_statusLog( "  ..*18.1: Scrolled (" + direction + ") '" + tag + ': profile-idx ' +
+  exp_statusLog( "  ..*18.2: Scrolled (" + direction + ") '" + tag + ': profile-idx ' +
                  jQuery( globals.bio_containers_class_ref ).find( tag ).attr('profile-idx') +
                  scroll_result_msg + "*" );
   if ( (scrolling_profile_idx_into_view + '') == jQuery( globals.bio_containers_class_ref ).attr('active_profile_idx') ) {
-    exp_statusLog( "  ..*18.1a: exp_scroll_trigger() scrolled_to_profile_idx = current. Ignore scroll event. *");
+    exp_statusLog( "  ..*18.2a: exp_scroll_trigger() scrolled_to_profile_idx = current. Ignore scroll event. *");
   } else {
     // explode halftone image background of active bio, restore updated content
     // of active bio to its profile.
