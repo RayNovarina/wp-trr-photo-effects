@@ -4,5 +4,14 @@
   "description": "online repository for trr-photo-effects",
   "dependencies": {
     "harp": "*"
+  },
+  "devDependencies": {
+    "gulp-concat": "^2.6.1",
+    "gulp-debug": "^3.1.0",
+    "gulp-load-plugins": "^1.5.0",
+    "gulp-minify": "^1.0.0",
+    "gulp-minify-html": "^1.0.6",
+    "gulp-uglify": "^3.0.0",
+    "gulp-util": "^3.0.8"
   }
 }
