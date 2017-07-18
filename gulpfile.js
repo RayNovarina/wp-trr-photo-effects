@@ -6,6 +6,7 @@ var gulp = require( 'gulp' ),
 
 gulp.task( 'minify', function() {
   gulp.src([
+    // "dev/src/*.js",
       './js/load_the_script_loader.js',
       //'./js/globals.js',
       //'./js/lib.js',

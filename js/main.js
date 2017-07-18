@@ -1,3 +1,5 @@
+//"use strict";
+
 // per: https://learn.jquery.com/using-jquery-core/document-ready/
 // A page can't be manipulated safely until the document is "ready."
 // jQuery detects this state of readiness for you.
@@ -47,3 +49,13 @@ jQuery( document ).ready(function() {
     /*5-*/});/*4-*/});/*3-*/});/*2-*/});/*1-*/});
   }, trr_globals.trr_loader_delay);
 });
+
+/*
+jQuery( document ).ready(function() {
+  console.log( "  ..*2c-domReady: *");
+  trr_controller = new TrrPhotoEffects.Controller( {
+      scroll_starts_animation: false,
+      click_starts_animation: false,
+  });
+}); // end jQuery( document ).ready
+*/

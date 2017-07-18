@@ -54,7 +54,7 @@ function trr_create_globals( callback ) {
 
     defaults: {
       // Scrolling results in change of bio.
-      scroll_events: false,
+      scroll_events: true,
       // Click on profile photo results in change of bio.
       click_events: false,
       // Photo's which is being animated in the animation_container.

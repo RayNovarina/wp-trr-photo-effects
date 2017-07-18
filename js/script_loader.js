@@ -1,3 +1,4 @@
+"use strict";
 var trr_loader_globals = {
   logging: true,
   //logging: false,
@@ -19,7 +20,7 @@ var trr_loader_globals = {
   third_party_scripts: [
       // 3rd party libs.
       'https://7975c016.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/ScrollMagic/scrollmagic/minified/ScrollMagic.min.js',
-      //'https://7975c016.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/ThreeJs/three.min.js',
+      'https://7975c016.ngrok.io/Sites/wordpress-5-exploding-profiles/wp-content/plugins/trr-photo-effects/js/ThreeJs/three.min.js',
   ],
 
   plugin_core_scripts: [

@@ -1,3 +1,4 @@
+"use strict";
 // NOTE: per: https://api.jquery.com/jquery.getscript/
 // By default, $.getScript() sets the cache setting to false. This appends a
 // timestamped query parameter to the request URL to ensure that the browser

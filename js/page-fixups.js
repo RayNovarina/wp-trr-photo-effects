@@ -1,5 +1,7 @@
 
 function trr_page_fixups( callback ) {
+  trr_statusLog( "  ..*5: page_fixups() *");
+
   trr_page_fixups_common(
   /*1-Resume here when done*/ function() {
   trr_page_fixups_if_dots_effect(
