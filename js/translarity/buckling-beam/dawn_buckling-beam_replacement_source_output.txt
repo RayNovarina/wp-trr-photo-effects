@@ -1,0 +1,642 @@
+
+<style id='customizr-skin-inline-css' type='text/css'>
+  .site-title,.site-description,h1,h2,h3,.tc-dropcap {
+                    font-family : 'Roboto';
+                    font-weight : inherit;
+                  }
+
+  body,.navbar .nav>li>a {
+                    font-family : 'Roboto';
+                    font-weight : inherit;
+                  }
+
+            body,.navbar .nav>li>a {
+              font-size : 18px;
+              line-height : 1.6em;
+            }
+  table { border-collapse: separate; }
+                           body table { border-collapse: collapse; }
+
+  .social-links .social-icon:before { content: none }
+
+  header.tc-header {border-top: none;}
+
+  .sticky-enabled .tc-shrink-on .site-logo img {
+    					height:30px!important;width:auto!important
+    				}
+
+  .sticky-enabled .tc-shrink-on .brand .site-title {
+    					font-size:0.6em;opacity:0.8;line-height:1.2em
+    				}
+
+  .tc-slider-loader-wrapper{ display:none }
+
+  html.js .tc-slider-loader-wrapper { display: block }.no-csstransforms3d .tc-slider-loader-wrapper .tc-img-gif-loader {
+                                                background: url('http://translarity.com/wp-content/themes/customizr/assets/front/img/slider-loader.gif') no-repeat center center;
+                                         }.tc-slider-loader-wrapper .tc-css-loader > div { border-color:#8183D8; }
+  #tc-push-footer { display: none; visibility: hidden; }
+
+  .tc-sticky-footer #tc-push-footer.sticky-footer-enabled { display: block; }
+</style>
+
+<style type="text/css" id="wp-custom-css">
+
+  /* change header color background color  */
+  header.tc-header {
+    background-color: #ffffff; important!
+    color: #000000; important!
+  }
+
+  /* Logo positioning  */
+    .tc-header .brand .site-logo img {
+      Position:   relative;
+  }
+
+  /* Nav bar positioning  */
+  .tc-header, .navbar-inner {
+                   position: relative;
+                   left: 0%;
+                   min-height: 25px;
+                   max-height: 25px;
+  }
+
+  .navbar .brand, .navbar .nav>li>a {
+    text-shadow: none !important;
+    color: #777;
+  }
+
+  /* Set color - current menu item */
+  .navbar .nav > li.current-menu-item>a {
+       color:          #000000;
+       font-style:      bold;
+       text-decoration: underline;
+       text-decoration-color: #662F90;
+  }
+
+  /* Set color - hover on menu item */
+  .navbar .nav > li > a:hover {
+          color:          #662F90;
+          font-style:     bold;
+          text-shadow:    none;
+  }
+
+  /* Set color when menu item clicked */
+  .navbar .nav > li > a:active {
+          color:          #FFFFFF;
+          font-style:     bold;
+          text-shadow:    none;
+  }
+
+  /* Set color current dropdown menu item */
+  .dropdown-menu > li.current-menu-item> a {
+                color:          #662F90;
+                font-style:     bold;
+  }
+
+  /* Set color - hover on dropdown Menu  */
+  .dropdown-menu > li > a:hover {
+              color:  #662F90;
+  }
+
+  /* dropdown Menu items  */
+           .tc-regular-menu .navbar .nav > li.current-menu-ancestor > a {
+            color:          #662F90;
+  }
+
+  /* Set bkgrd + border on dropdown menu */
+  .dropdown-menu {
+               border:  1px solid #662F90;
+               background: #ECEAEF;
+  }
+
+  /* Dropdown Menu items - Hover color shading and border */
+  .dropdown-menu > li > a:hover, .dropdown-menu > li > a:hover {
+    color:          #000000;
+    background:    white;
+    font-style:     bold;
+    border:  1px #662F90;
+  }
+
+  /*  get rid of line below header   */
+  header.tc-header {
+    border-bottom: 0;
+  }
+
+  /* begin customization for BB home page */
+/* BucklingBeam background */
+body.page-id-1302 {
+background: #D0D0D0;
+color: #000000;
+}
+
+
+
+/* BucklingBeam outer div for main page */
+div.BBout {
+   background: #F0F0F0 !important;
+   color: #000000;
+   min-height: 100vh;
+   padding-left: 2%;
+   padding-right: 2%;
+   padding-top: 1em;
+   padding-bottom: 1em;
+   margin-top: 0px;
+   margin-bottom: 0px;
+
+}
+
+
+/* BucklingBeam inner div for main page */
+div.BB {
+   background: #F0F0F0;
+   color: #000000;
+   padding-left: 10%;
+   padding-right: 10%;
+}
+/* BucklingBeam div for footer on page */
+div.BBfooter {
+   color: #8c8c8c;
+   text-align: left;
+   font-size: 12px;
+   font-type: arial;
+   line-height: 14px;
+   padding-top: 2em;
+   padding-bottom: 3em;
+   padding-left: 5%;
+   padding-right: 5%;
+}
+
+
+/* Div for BB floating box */
+div.BBfloating {
+       display: inline-block;
+       padding-top: 2em;
+       padding-left: 0%;
+       margin-left: .5em;
+}
+
+
+.page-id-1302
+.navbar
+.nav>li>a {
+ display: none;
+}
+
+.page-id-1302
+a.site-logo {
+  display: none;
+}
+
+.page-id-1302
+.header.tc {
+  display: none;
+}
+
+/* match the background color */
+.page-id-1302
+header.tc-header {
+    background-color: #D0D0D0;
+}
+
+/* hide the footer */
+.page-id-1302
+footer#footer {
+  display: none;
+}
+
+
+/* change the background color */
+body {
+  background: none repeat scroll 0 0 #FFFFFF;
+  color: #000000;
+  padding-bottom: 0;
+}
+
+/* Remove Page Icon/Title */
+.page .entry-title {
+display: none;
+}
+
+/* div for staging site */
+div.staging {
+     color:  000000;
+     background: FFFFFF;
+     border: 3px solid #E2A54E;
+     padding: 2%
+}
+
+/* div for home page copy  */
+div.homepage {
+     color:  000000;
+     background: FFFFFF;
+     line-height: 1.2em;
+     padding-left: 0%;
+     padding-right: 0%;
+     margin-bottom: .5em;
+     margin-top: .5em;
+}
+
+
+/* div full width home pg bkgrnd image */
+div.homepage-background-image {
+background-image: url("http://translarity.com/wp-content/uploads/2017/08/Banner1_bkgrnd_1600x400.png");
+     width: 100vw;
+     position: relative;
+     left: 50%;
+     right: 50%;
+     margin-left: -50vw;
+     margin-right: -50vw;
+     text-align: center;
+     background-size: 100% 100%;
+     background-repeat: no-repeat;
+     color:  000000;
+     padding-left: 0%;
+     padding-right: 0%;
+     padding-top: 1em;
+     padding-bottom: 1em;
+}
+
+/* div full width - home pg product section */
+div.homepage_product {
+     width: 100vw;
+     position: relative;
+     left: 50%;
+     right: 50%;
+     margin-left: -50vw;
+     margin-right: -50vw;
+     text-align: center;
+     color:  000000;
+     background-color: #FBF4E9;
+     padding-top: 1.5em;
+     padding-bottom: 1em;
+}
+
+
+/* div full width product pg bkgrnd image */
+div.prodpage-background-image {
+background-image: url("http://translarity.com/wp-content/uploads/2017/08/Banner2_backgrd.png");
+     width: 100vw;
+     position: relative;
+     left: 50%;
+     right: 50%;
+     margin-left: -50vw;
+     margin-right: -50vw;
+     text-align: center;
+     background-size: 100% 100%;
+     background-repeat: no-repeat;
+     color:  000000;
+     padding-left: 0%;
+     padding-right: 0%;
+     margin-bottom: 1em;
+}
+
+
+/* div full width site pg bkgrnd color */
+div.sitepage-title-background-color {
+     width: 100vw;
+     position: relative;
+     left: 50%;
+     right: 50%;
+     margin-left: -50vw;
+     margin-right: -50vw;
+     color:  000000;
+     height: 107px;
+     background-color: #FBF4E9;
+}
+
+/* div for page lead copy */
+div.leadcopy {
+     text-align: center;
+     color:  000000;
+     background: FFFFFF;
+     padding-left: 0%;
+     padding-right: 0%;
+}
+
+/* div for page copy */
+div.pagecopy {
+     color:  000000;
+     background: FFFFFF;
+     padding-left: 0%;
+     padding-right: 0%;
+     padding-top: 2em;
+}
+
+
+/* div for icons */
+div.icons {
+     margin: auto;
+     width: 100% !important;
+     text-align: center;
+     color:  000000;
+     padding-left: 0%;
+     padding-right: 0%;
+     padding-top: 3em;
+     padding-bottom: 1em;
+}
+
+
+/* Div for floating box */
+div.floating {
+       display: inline-block;
+       padding: 2%;
+       margin-left: 0%;
+}
+
+
+ul.bullets {
+     text-align: left;
+     list-style-type:;
+     padding-left: 20%;
+
+}
+ul.bullet {
+     text-align: left;
+     list-style-type:;
+     padding-top: 2em;
+	 padding-left: 10%;
+     padding-right: 10%;
+}
+
+/* header definitions */
+h1 {
+     text-align: left;
+     padding-left: 0%;
+     color: black;
+     font-size: 2em;
+     line-height: 1.2;
+}
+h2 {
+     padding-left: 10%;
+     padding-right: 10%;
+     color: black;
+     font-size: 1.5em;
+     line-height: 1.2;
+     }
+h3 {
+     padding-left: 10%;
+     padding-right: 10%;
+     color: black
+     font-size: 1.17em;
+     line-height: 1.5;
+      }
+h4 {
+     padding-left: 0%;
+     color: black;
+     font-size: 1.12em;
+     line-height: 1.5;
+      }
+
+/* set home paragraph params */
+p.home {
+    margin-top: 1em;
+    margin-bottom: 1em;;
+    padding-right: 5%;
+    padding-left:  5%;
+    color: black;
+   font-size:  1.12em;
+   line-height: 1.5;
+}
+/* set newscopy paragraph params */
+p.newscopy {
+    margin-top: 2em;
+    margin-bottom: 2em;
+   padding-right: 12%;
+   padding-left:  12%;
+    color: black;
+   font-size:  1em;
+   line-height: 1.5;
+}
+
+/*set leadhead paragraph params */
+p.leadhead {
+     font-size: 1.5em;
+     padding-bottom: .5em
+}
+
+
+/* set full paragraph params */
+p.full {
+    padding-right: 10%;
+    padding-left: 10%;
+    padding-bottom: .75em
+}
+
+/* set sub paragraph params */
+p.sub {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding-right: 20%;
+    padding-left: 20%;
+}
+
+
+/* set spc paragraph params */
+p.spc {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding-right: 20%;
+    padding-left: 20%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+
+/* the end of paragraph formats */
+/* special addition for Edge */
+html{-ms-overflow-style: scrollbar;}
+body{-ms-overflow-style: scrollbar;}
+
+/* Section dividing line color size */
+.featurette-divider {
+    margin: 30px 0;
+    clear: both;
+    border: none;
+}
+
+/* setting space between list items */
+article ul li { margin-bottom: 12px; }
+/* end of list item adjustments */
+
+
+/* Remove Page/Post icon */
+     .page #main-wrapper h1.format-icon:before {
+     content:    none;
+}
+/* set all widget title parameters */
+#footer #footer_one h3.widget-title {
+     text-align: left;
+     color: #000000;
+     font-size: 14px;
+     font-weight: bold;
+}
+#footer #footer_two h3.widget-title{
+     text-align: left;
+     color: #000000;
+     font-size: 14px;
+     font-weight: bold;
+}
+#footer #footer_three h3.widget-title{
+     text-align: left;
+     color: #000000;
+     font-size: 14px;
+     font-weight: bold;
+}
+
+/* set widget content parameters */
+div.textwidget.custom-html-widget {
+     color: #000000;
+     font-size: 14px;
+     padding-left: 10%;
+}
+
+/* Change background color of footer */
+footer#footer {
+background-color: #E8AA61;
+}
+
+/* Remove grey bar  */
+footer#footer {
+border-top:   none;
+}
+
+/* Reduce whitespace  */
+#main-wrapper {
+ margin-bottom:  0px;
+}
+
+/* Change Background, Border, Font/Color as needed */
+footer#footer .colophon {
+     background: none repeat scroll 0 0 #E8AA61;
+     border-top: none;
+}
+/* Change font-size, alignment as needed */
+footer#footer .colophon p, footer#footer .colophon a {
+     color: #E8AA61;
+     text-align:  center;
+     line-height:  1.2em ;
+}
+</style>
+
+</head>
+
+
+<body class="page-template-default page page-id-1302 tc-fade-hover-links
+             tc-no-sidebar tc-center-images skin-purple2 tc-no-sticky-header
+             sticky-disabled no-navbar tc-regular-menu tc-sticky-footer"
+             itemscope itemtype="http://schema.org/WebPage">
+
+  <div id="tc-page-wrap" class="">
+  	<header class="tc-header clearfix row-fluid tc-tagline-off tc-title-logo-on  tc-shrink-on tc-menu-on logo-left tc-second-menu-in-sn-before-when-mobile" role="banner">
+      <div class="brand span3 pull-left">
+        <a class="site-logo" href="http://translarity.com/" title="Translarity | "><img src="http://translarity.com/wp-content/uploads/2017/08/Translarity_LOGO_250x50.png" alt="Back Home" width="250" height="40"   class=" attachment-1298"/></a>        </div> <!-- brand span3 -->
+        <div class="navbar-wrapper clearfix span9 tc-submenu-move tc-open-on-hover pull-menu-left">
+        	<div class="navbar resp">
+          		<div class="navbar-inner" role="navigation">
+            		<div class="row-fluid">
+              		<div class="nav-collapse collapse tc-hover-menu-wrapper"><div class="menu-primary-menu-container"><ul id="menu-primary-menu-2" class="nav tc-hover-menu"><li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-170"><a href="http://translarity.com/translarity-wafer-translator-offers-lowest-cost-test/">Home</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-169"><a href="http://translarity.com/wafer-translator-technology/">Technology</a></li>
+<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-828"><a href="http://translarity.com">News</a></li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children dropdown menu-item-172"><a href="http://translarity.com/about/">About Us <strong class="caret"></strong></a>
+<ul class="dropdown-menu">
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-297"><a href="http://translarity.com/management-team/">Management Team</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-298"><a href="http://translarity.com/board-of-directors/">Board of Directors</a></li>
+</ul>
+</li>
+<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-171"><a href="http://translarity.com/contact/">Contact</a></li>
+</ul></div></div><div class="btn-toggle-nav pull-right"><button type="button" class="btn menu-btn" data-toggle="collapse" data-target=".nav-collapse" title="Open the menu" aria-label="Open the menu"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span> </button></div>          			</div><!-- /.row-fluid -->
+          		</div><!-- /.navbar-inner -->
+        	</div><!-- /.navbar resp -->
+      	</div><!-- /.navbar-wrapper -->
+</header>
+
+<div id="main-wrapper" class="container">
+  <div class="container" role="main">
+    <div class="row column-content-wrapper">
+      <div id="content" class="span12 article-container">
+        <article id="page-1302" class="row-fluid post-1302 page type-page status-publish hentry">
+          <header class="entry-header">
+          <h1 class="entry-title ">Staging Site Buckling Beam Home Page</h1><hr class="featurette-divider __before_content">        </header>
+
+          <div class="entry-content">
+            <div class="BBout">
+              <div class="floating"><img class="alignright size-full wp-image-1340" src="http://translarity.com/wp-content/uploads/2017/08/BucklingBeam-logo-large-1.png" alt="" width="250" height="111" />
+            </div>
+<p style="text-align: left; font-type: arial; font-size: 17px; padding-left: 12%; padding-bottom: 1.75em;">Home   Our Story   Products &amp; Technology   Gallery   Service  News   Careers   Contact</p>
+<p><img class="aligncenter size-full wp-image-1311" src="http://translarity.com/wp-content/uploads/2017/08/2-1-BucklingBeam-Slider-1.jpg" alt="" width="928" height="471" srcset="http://translarity.com/wp-content/uploads/2017/08/2-1-BucklingBeam-Slider-1.jpg 928w, http://translarity.com/wp-content/uploads/2017/08/2-1-BucklingBeam-Slider-1-300x152.jpg 300w, http://translarity.com/wp-content/uploads/2017/08/2-1-BucklingBeam-Slider-1-768x390.jpg 768w" sizes="(max-width: 928px) 100vw, 928px" /></p>
+<div style="padding-left:8%;">
+<div class="BBfloating"><img class="alignnone size-full wp-image-1327" src="http://translarity.com/wp-content/uploads/2017/08/home-motus.jpg" alt="" width="226" height="102" />
+</div>
+<div class="BBfloating"><img class="alignnone size-full wp-image-1328" src="http://translarity.com/wp-content/uploads/2017/08/home-video.jpg" alt="" width="226" height="102" />
+</div>
+<div class="BBfloating"><img class="alignnone size-full wp-image-1329" src="http://translarity.com/wp-content/uploads/2017/08/home-motus-3.jpg" alt="" width="226" height="102" />
+</div>
+<div class="BBfloating"><img class="alignnone size-full wp-image-1330" src="http://translarity.com/wp-content/uploads/2017/08/home-testing.jpg" alt="" width="226" height="102" />
+</div>
+</div>
+<div class="BBfooter" style="padding-left:9%;">
+<p style="text-align: left; font-size: 12px;">Home | Our Story | Products &amp; Technology | Gallery | Service | News | Careers | Contact |&nbsp;&nbsp;     ©2017 BucklingBeam Solutions, LLC. All Rights Reserved.</p>
+</div>
+</div>
+
+        </div>
+      </article>
+    </div><!--.article-container -->
+  </div><!--.row -->
+</div><!-- .container role: main -->
+
+<div id="tc-push-footer"></div>
+</div><!-- //#main-wrapper -->
+
+<!-- FOOTER -->
+<footer id="footer" class="">
+  		 					<div class="container footer-widgets  no-widget-icons">
+                    <div class="row widget-area" role="complementary">
+
+							<div id="footer_one" class="span4">
+
+										<aside id="custom_html-7" class="widget_text widget widget_custom_html"><h3 class="widget-title">News</h3><div class="textwidget custom-html-widget">
+&nbsp; <br>
+&nbsp; <br>
+&nbsp; <br>
+&nbsp; <br>
+&nbsp; <br>
+&nbsp; <br>
+&nbsp; <br>
+<span style="color: #ffffff;">&copy 2017 Translarity, Inc. </span></div></aside>
+																							</div><!-- .{$key}_widget_class -->
+
+				<div id="footer_two" class="span4">						<aside id="custom_html-8" class="widget_text widget widget_custom_html"><h3 class="widget-title">Categories</h3><div class="textwidget custom-html-widget">Home<br>
+Technology<br>
+News<br>
+About Us <br>
+Contact<br>
+
+&nbsp; <br>
+&nbsp; <br>
+<span style="color: #ffffff;">Designed by Market Operandi, Inc.</span>
+</div></aside>
+																							</div><!-- .{$key}_widget_class -->
+		<div id="footer_three" class="span4">
+				<aside id="custom_html-9" class="widget_text widget widget_custom_html"><h3 class="widget-title">Locations</h3><div class="textwidget custom-html-widget"><strong>Corporate Headquarters<br></strong>
+46575 Fremont Boulevard<br>
+Fremont, CA 94538<br>
+&nbsp;<br></div></aside>
+								</div><!-- .{$key}_widget_class -->
+
+																	</div><!-- .row.widget-area -->
+				</div><!--.footer-widgets -->
+				    				 <div class="colophon">
+			 	<div class="container">
+			 		<div class="row-fluid">
+					    <div class="span3 social-block pull-left"></div><div class="span6 credits"><p>&middot; <span class="tc-copyright-text">&copy; 2017</span> <a href="http://translarity.com" title="Translarity" rel="bookmark">Translarity</a> &middot; <span class="tc-credits-text">Designed by</span> <a href="http://presscustomizr.com/">Press Customizr</a> &middot; <span class="tc-wp-powered-text">Powered by</span> <a class="icon-wordpress" target="_blank" href="https://wordpress.org" title="Powered by WordPress"></a> &middot;</p></div>	      			</div><!-- .row-fluid -->
+	      		</div><!-- .container -->
+	      	</div><!-- .colophon -->
+</footer>
+
+</div><!-- //#tc-page-wrapper -->
+
+<div id="tc-footer-btt-wrapper" class="tc-btt-wrapper right"><i class="btt-arrow"></i></div>
+
+</body>
+</html>
